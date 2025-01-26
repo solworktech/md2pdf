@@ -1,6 +1,7 @@
 
 [![CI][badge-build]][build]
 [![GoDoc][go-docs-badge]][go-docs]
+[![GoReportCard][go-report-card-badge]][go-report-card]
 [![License][badge-license]][license]
 
 ## Markdown to PDF
@@ -217,3 +218,5 @@ go: added gopkg.in/yaml.v2 v2.4.0
 [go-docs]: https://godoc.org/github.com/mandolyte/mdtopdf
 [badge-build]: https://github.com/mandolyte/mdtopdf/actions/workflows/go.yml/badge.svg
 [build]: https://github.com/mandolyte/mdtopdf/actions/workflows/go.yml
+[go-report-card-badge]: https://goreportcard.com/badge/github.com/solworktech/mdtopdf
+[go-report-card]: https://goreportcard.com/report/github.com/solworktech/mdtopdf
