@@ -54,7 +54,7 @@ and data provided in each while the AST is presented.
 3. The markdown link title, which would show when converted to HTML as hover-over text, is not supported. The generated PDF will show the actual URL that will be used if clicked, but this is a function of the PDF viewer.
 
 4. Currently all levels of unordered lists use a dash for the bullet. 
-This is a planned fix; [see here](https://github.com/mandolyte/mdtopdf/issues/1).
+This is a planned fix; [see here](https://github.com/solworktech/mdtopdf/issues/1).
 
 5. Definition lists are not supported (not sure that markdown supports them -- I need to research this)
 
@@ -64,16 +64,16 @@ This is a planned fix; [see here](https://github.com/mandolyte/mdtopdf/issues/1)
 
 ## Installation 
 
-You can obtain the pre-built `md2pdf` binary for your OS and arch [here](https://github.com/mandolyte/mdtopdf/releases);
+You can obtain the pre-built `md2pdf` binary for your OS and arch [here](https://github.com/solworktech/mdtopdf/releases);
 alternatively, install golang and run `go get`:
 
 ```
-$ go get github.com/mandolyte/mdtopdf
+$ go get github.com/solworktech/mdtopdf
 ```
 
 You can also install the `md2pdf` binary directly onto your `$GOBIN` dir with:
 ```
-$ go install github.com/mandolyte/mdtopdf/cmd/md2pdf@latest
+$ go install github.com/solworktech/mdtopdf/cmd/md2pdf@latest
 ```
 
 ## Syntax highlighting
@@ -210,19 +210,19 @@ $ cat go.mod
 module example.com/mypkg
 
 go 1.20
-$ GOPROXY=https://proxy.golang.org GO111MODULE=on go get github.com/mandolyte/mdtopdf@v1.4.1
+$ GOPROXY=https://proxy.golang.org GO111MODULE=on go get github.com/solworktech/mdtopdf@v1.4.1
 go: added github.com/go-pdf/fpdf v0.8.0
 go: added github.com/jessp01/gohighlight v0.21.1-7
-go: added github.com/mandolyte/mdtopdf v1.4.1
+go: added github.com/solworktech/mdtopdf v1.4.1
 go: added github.com/gomarkdown/markdown 
 go: added gopkg.in/yaml.v2 v2.4.0
 ```
 
 [license]: ./LICENSE
-[badge-license]: https://img.shields.io/github/license/mandolyte/mdtopdf.svg
-[go-docs-badge]: https://godoc.org/github.com/mandolyte/mdtopdf?status.svg
-[go-docs]: https://godoc.org/github.com/mandolyte/mdtopdf
-[badge-build]: https://github.com/mandolyte/mdtopdf/actions/workflows/go.yml/badge.svg
-[build]: https://github.com/mandolyte/mdtopdf/actions/workflows/go.yml
+[badge-license]: https://img.shields.io/github/license/solworktech/mdtopdf.svg
+[go-docs-badge]: https://godoc.org/github.com/solworktech/mdtopdf?status.svg
+[go-docs]: https://godoc.org/github.com/solworktech/mdtopdf/v2
+[badge-build]: https://github.com/solworktech/mdtopdf/actions/workflows/go.yml/badge.svg
+[build]: https://github.com/solworktech/mdtopdf/actions/workflows/go.yml
 [go-report-card-badge]: https://goreportcard.com/badge/github.com/solworktech/mdtopdf
 [go-report-card]: https://goreportcard.com/report/github.com/solworktech/mdtopdf
