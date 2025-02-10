@@ -23,8 +23,10 @@ package mdtopdf
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"io"
 	"os"
+	"encoding/json"
 
 	"strings"
 
@@ -60,10 +62,12 @@ type RenderOption func(r *PdfRenderer)
 type Theme int
 
 const (
-	// DARK const
+	// DARK theme const
 	DARK Theme = 1
-	// LIGHT const
+	// LIGHT theme const
 	LIGHT Theme = 2
+	// CUSTOM theme const
+	CUSTOM Theme = 3
 )
 
 // PdfRenderer is the struct to manage conversion of a markdown object
@@ -229,34 +233,53 @@ func (r *PdfRenderer) SetDarkTheme() {
 
 }
 
+func (r *PdfRenderer) SetCustomTheme(themeJsonFile string) {
+
+    config, err := os.ReadFile(themeJsonFile)
+    if err != nil {
+	log.Fatal(err)
+    }
+    // Fill the instance from the JSON file content
+    err = json.Unmarshal(config, &r)
+    log.Printf("BackgroundColor: %v\n", r.BackgroundColor)
+    // Check if is there any error while filling the instance
+    if err != nil {
+	panic(err)
+    }
+}
+
+type PdfRendererParams struct {
+  Orientation, Papersz, PdfFile, TracerFile, FontFile, FontName string
+  Opts []RenderOption
+  Theme Theme
+  CustomThemeFile string
+}
+
 // NewPdfRenderer creates and configures an PdfRenderer object,
 // which satisfies the Renderer interface.
-func NewPdfRenderer(orient, papersz, pdfFile, tracerFile string, opts []RenderOption, theme Theme) *PdfRenderer {
+func NewPdfRenderer(params PdfRendererParams) *PdfRenderer {
 
 	r := new(PdfRenderer)
 
 	// set filenames
-	r.pdfFile = pdfFile
-	r.tracerFile = tracerFile
+	r.pdfFile = params.PdfFile
+	r.tracerFile = params.TracerFile
 
 	// Global things
 	r.orientation = "portrait"
-	if orient != "" {
-		r.orientation = orient
+	if params.Orientation != "" {
+		r.orientation = params.Orientation
 	}
 
 	r.units = "pt"
 	r.papersize = "Letter"
-	if papersz != "" {
-		r.papersize = papersz
+	if params.Papersz != "" {
+		r.papersize = params.Papersz
 	}
 
 	r.fontdir = "."
 
-	r.Theme = theme
-	if theme == 0 {
-		r.Theme = LIGHT
-	}
+	r.Theme = params.Theme
 
 	r.Pdf = fpdf.New(r.orientation, r.units, r.papersize, r.fontdir)
 
@@ -264,13 +287,18 @@ func NewPdfRenderer(orient, papersz, pdfFile, tracerFile string, opts []RenderOp
 		r.SetPageBackground("", r.BackgroundColor)
 	})
 
-	r.Pdf.AddPage()
 	switch r.Theme {
 	case DARK:
-		r.SetDarkTheme()
+	    r.SetDarkTheme()
 	case LIGHT:
-		r.SetLightTheme()
+	    r.SetLightTheme()
+	case CUSTOM:
+	    if params.CustomThemeFile != "" {
+		log.Printf("Custom: %s\n", params.CustomThemeFile)
+		r.SetCustomTheme(params.CustomThemeFile) 
+	    }
 	}
+	r.Pdf.AddPage()
 	// set default font
 	r.setStyler(r.Normal)
 	r.mleft, r.mtop, r.mright, r.mbottom = r.Pdf.GetMargins()
@@ -283,7 +311,7 @@ func NewPdfRenderer(orient, papersz, pdfFile, tracerFile string, opts []RenderOp
 		textStyle: r.Normal, leftMargin: r.mleft}
 	r.cs.push(initcurrent)
 
-	for _, o := range opts {
+	for _, o := range params.Opts {
 		o(r)
 	}
 
@@ -297,8 +325,16 @@ func NewPdfRendererWithDefaultStyler(orient, papersz, pdfFile, tracerFile string
 	opts = append(opts, func(r *PdfRenderer) {
 		r.Normal = defaultStyler
 	})
+	params := PdfRendererParams{
+	    Orientation: orient, 
+	    Papersz: papersz, 
+	    PdfFile: pdfFile, 
+	    TracerFile: tracerFile,
+	    Opts: opts, 
+	    Theme: theme, 
+	}
 
-	return NewPdfRenderer(orient, papersz, pdfFile, tracerFile, opts, theme)
+	return NewPdfRenderer(params)
 }
 
 // Process takes the markdown content, parses it to generate the PDF

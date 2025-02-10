@@ -26,7 +26,7 @@ var author = flag.String("author", "", "Author; used if -footer is passed")
 var unicodeSupport = flag.String("unicode-encoding", "", "e.g 'cp1251'")
 var fontFile = flag.String("font-file", "", "path to font file to use")
 var fontName = flag.String("font-name", "", "Font name ID; e.g 'Helvetica-1251'")
-var themeArg = flag.String("theme", "light", "[light|dark]")
+var themeArg = flag.String("theme", "light", "[light | dark | /path/to/custom/theme.json]")
 var hrAsNewPage = flag.Bool("new-page-on-hr", false, "Interpret HR as a new page; useful for presentations")
 var printFooter = flag.Bool("with-footer", false, "Print doc footer (author  title  page number)")
 var pageSize = flag.String("page-size", "A4", "[A3 | A4 | A5]")
@@ -140,38 +140,49 @@ func main() {
 	}
 
 	theme := mdtopdf.LIGHT
-	textColor := mdtopdf.Colorlookup("black")
-	fillColor := mdtopdf.Colorlookup("white")
-	backgroundColor := "white"
+	themeFile := ""
 	if *themeArg == "dark" {
 		theme = mdtopdf.DARK
-		backgroundColor = "black"
-		textColor = mdtopdf.Colorlookup("darkgray")
-		fillColor = mdtopdf.Colorlookup("black")
+	}else if _, err := os.Stat(*themeArg); err == nil {
+		theme = mdtopdf.CUSTOM
+		themeFile = *themeArg
 	}
 
-	pf := mdtopdf.NewPdfRenderer(*orientation, *pageSize, *output, *logFile, opts, theme)
+	params := mdtopdf.PdfRendererParams{
+	    Orientation: *orientation, 
+	    Papersz: *pageSize, 
+	    PdfFile: *output, 
+	    TracerFile: *logFile,
+	    Opts: opts, 
+	    Theme: theme, 
+	    CustomThemeFile: themeFile,
+	    FontFile: *fontFile,
+	    FontName: *fontName,
+	}
+
+	pf := mdtopdf.NewPdfRenderer(params)
 	if inputBaseURL != "" {
 		pf.InputBaseURL = inputBaseURL
 	}
 	pf.Pdf.SetSubject(*title, true)
 	pf.Pdf.SetTitle(*title, true)
-	pf.BackgroundColor = mdtopdf.Colorlookup(backgroundColor)
 	pf.Extensions = parser.NoIntraEmphasis | parser.Tables | parser.FencedCode | parser.Autolink | parser.Strikethrough | parser.SpaceHeadings | parser.HeadingIDs | parser.BackslashLineBreak | parser.DefinitionLists
 
 	if *fontFile != "" && *fontName != "" {
 		pf.Pdf.AddFont(*fontName, "", *fontFile)
 		pf.Pdf.SetFont(*fontName, "", 12)
-		pf.Normal = mdtopdf.Styler{Font: *fontName, Style: "",
+		pf.Normal = mdtopdf.Styler{
+			Font: *fontName, 
+			Style: "",
 			Size: 12, Spacing: 2,
-			FillColor: fillColor,
-			TextColor: textColor}
+			TextColor: pf.Normal.TextColor,
+		}
+		
 	}
 
 	if *printFooter {
 		pf.Pdf.SetFooterFunc(func() {
-			color := mdtopdf.Colorlookup(backgroundColor)
-			pf.Pdf.SetFillColor(color.Red, color.Green, color.Blue)
+			pf.Pdf.SetFillColor(pf.BackgroundColor.Red, pf.BackgroundColor.Green, pf.BackgroundColor.Blue)
 			// Position at 1.5 cm from bottom
 			pf.Pdf.SetY(-15)
 			// Arial italic 8
