@@ -220,9 +220,9 @@ go: added gopkg.in/yaml.v2 v2.4.0
 
 [license]: ./LICENSE
 [badge-license]: https://img.shields.io/github/license/solworktech/mdtopdf.svg
-[go-docs-badge]: https://godoc.org/github.com/solworktech/mdtopdf?status.svg
-[go-docs]: https://godoc.org/github.com/solworktech/mdtopdf/v2
+[go-docs-badge]: https://godoc.org/github.com/mandolyte/mdtopdf?status.svg
+[go-docs]: https://godoc.org/github.com/mandolyte/mdtopdf/v2
 [badge-build]: https://github.com/solworktech/mdtopdf/actions/workflows/go.yml/badge.svg
 [build]: https://github.com/solworktech/mdtopdf/actions/workflows/go.yml
-[go-report-card-badge]: https://goreportcard.com/badge/github.com/solworktech/mdtopdf
-[go-report-card]: https://goreportcard.com/report/github.com/solworktech/mdtopdf
+[go-report-card-badge]: https://goreportcard.com/badge/github.com/mandolyte/mdtopdf/v2
+[go-report-card]: https://goreportcard.com/report/github.com/mandolyte/mdtopdf/v2
