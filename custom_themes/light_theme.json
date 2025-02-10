@@ -1,0 +1,217 @@
+{
+  "Normal": {
+    "Font": "Arial",
+    "Style": "",
+    "Size": 12,
+    "Spacing": 2,
+    "TextColor": {
+      "Red": 0,
+      "Green": 0,
+      "Blue": 0
+    },
+    "FillColor": {
+      "Red": 255,
+      "Green": 255,
+      "Blue": 255
+    }
+  },
+  "Link": {
+    "Font": "Arial",
+    "Style": "b",
+    "Size": 12,
+    "Spacing": 2,
+    "TextColor": {
+      "Red": 100,
+      "Green": 149,
+      "Blue": 237
+    },
+    "FillColor": {
+      "Red": 0,
+      "Green": 0,
+      "Blue": 0
+    }
+  },
+  "Backtick": {
+    "Font": "Times",
+    "Style": "",
+    "Size": 12,
+    "Spacing": 2,
+    "TextColor": {
+      "Red": 37,
+      "Green": 27,
+      "Blue": 14
+    },
+    "FillColor": {
+      "Red": 200,
+      "Green": 200,
+      "Blue": 200
+    }
+  },
+  "Blockquote": {
+    "Font": "Arial",
+    "Style": "i",
+    "Size": 12,
+    "Spacing": 2,
+    "TextColor": {
+      "Red": 0,
+      "Green": 0,
+      "Blue": 0
+    },
+    "FillColor": {
+      "Red": 255,
+      "Green": 255,
+      "Blue": 255
+    }
+  },
+  "IndentValue": 0,
+  "H1": {
+    "Font": "Arial",
+    "Style": "b",
+    "Size": 24,
+    "Spacing": 5,
+    "TextColor": {
+      "Red": 0,
+      "Green": 0,
+      "Blue": 0
+    },
+    "FillColor": {
+      "Red": 255,
+      "Green": 255,
+      "Blue": 255
+    }
+  },
+  "H2": {
+    "Font": "Arial",
+    "Style": "b",
+    "Size": 21,
+    "Spacing": 5,
+    "TextColor": {
+      "Red": 0,
+      "Green": 0,
+      "Blue": 0
+    },
+    "FillColor": {
+      "Red": 255,
+      "Green": 255,
+      "Blue": 255
+    }
+  },
+  "H3": {
+    "Font": "Arial",
+    "Style": "b",
+    "Size": 20,
+    "Spacing": 5,
+    "TextColor": {
+      "Red": 0,
+      "Green": 0,
+      "Blue": 0
+    },
+    "FillColor": {
+      "Red": 255,
+      "Green": 255,
+      "Blue": 255
+    }
+  },
+  "H4": {
+    "Font": "Arial",
+    "Style": "b",
+    "Size": 18,
+    "Spacing": 5,
+    "TextColor": {
+      "Red": 0,
+      "Green": 0,
+      "Blue": 0
+    },
+    "FillColor": {
+      "Red": 255,
+      "Green": 255,
+      "Blue": 255
+    }
+  },
+  "H5": {
+    "Font": "Arial",
+    "Style": "b",
+    "Size": 16,
+    "Spacing": 5,
+    "TextColor": {
+      "Red": 0,
+      "Green": 0,
+      "Blue": 0
+    },
+    "FillColor": {
+      "Red": 255,
+      "Green": 255,
+      "Blue": 255
+    }
+  },
+  "H6": {
+    "Font": "Arial",
+    "Style": "b",
+    "Size": 14,
+    "Spacing": 5,
+    "TextColor": {
+      "Red": 0,
+      "Green": 0,
+      "Blue": 0
+    },
+    "FillColor": {
+      "Red": 255,
+      "Green": 255,
+      "Blue": 255
+    }
+  },
+  "THeader": {
+    "Font": "Arial",
+    "Style": "b",
+    "Size": 12,
+    "Spacing": 2,
+    "TextColor": {
+      "Red": 0,
+      "Green": 0,
+      "Blue": 0
+    },
+    "FillColor": {
+      "Red": 180,
+      "Green": 180,
+      "Blue": 180
+    }
+  },
+  "TBody": {
+    "Font": "Arial",
+    "Style": "",
+    "Size": 12,
+    "Spacing": 2,
+    "TextColor": {
+      "Red": 0,
+      "Green": 0,
+      "Blue": 0
+    },
+    "FillColor": {
+      "Red": 240,
+      "Green": 240,
+      "Blue": 240
+    }
+  },
+  "Code": {
+    "Font": "Times",
+    "Style": "",
+    "Size": 12,
+    "Spacing": 2,
+    "TextColor": {
+      "Red": 37,
+      "Green": 27,
+      "Blue": 14
+    },
+    "FillColor": {
+      "Red": 200,
+      "Green": 200,
+      "Blue": 200
+    }
+  },
+  "Theme": 3,
+  "BackgroundColor": {
+    "Red": 255,
+    "Green": 255,
+    "Blue": 255
+  }
+}

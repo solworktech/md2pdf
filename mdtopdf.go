@@ -22,11 +22,11 @@ package mdtopdf
 
 import (
 	"bufio"
-	"fmt"
-	"log"
-	"io"
-	"os"
 	"encoding/json"
+	"fmt"
+	"io"
+	"log"
+	"os"
 
 	"strings"
 
@@ -179,7 +179,6 @@ func (r *PdfRenderer) SetLightTheme() {
 	// Table Body Text
 	r.TBody = Styler{Font: "Arial", Style: "", Size: 12, Spacing: 2,
 		TextColor: Colorlookup("black"), FillColor: Color{240, 240, 240}}
-
 }
 
 // SetDarkTheme sets theme to 'dark'
@@ -233,26 +232,27 @@ func (r *PdfRenderer) SetDarkTheme() {
 
 }
 
-func (r *PdfRenderer) SetCustomTheme(themeJsonFile string) {
+// SetCustomTheme sets a custom theme based on JSON config
+func (r *PdfRenderer) SetCustomTheme(themeJSONFile string) {
 
-    config, err := os.ReadFile(themeJsonFile)
-    if err != nil {
-	log.Fatal(err)
-    }
-    // Fill the instance from the JSON file content
-    err = json.Unmarshal(config, &r)
-    log.Printf("BackgroundColor: %v\n", r.BackgroundColor)
-    // Check if is there any error while filling the instance
-    if err != nil {
-	panic(err)
-    }
+	config, err := os.ReadFile(themeJSONFile)
+	if err != nil {
+		log.Fatal(err)
+	}
+	// Fill the instance from the JSON file content
+	err = json.Unmarshal(config, &r)
+	// Check if is there any error while filling the instance
+	if err != nil {
+		log.Fatal("Error parsing ", themeJSONFile, ":\n", err)
+	}
 }
 
+// PdfRendererParams struct to hold params passed to NewPdfRenderer
 type PdfRendererParams struct {
-  Orientation, Papersz, PdfFile, TracerFile, FontFile, FontName string
-  Opts []RenderOption
-  Theme Theme
-  CustomThemeFile string
+	Orientation, Papersz, PdfFile, TracerFile, FontFile, FontName string
+	Opts                                                          []RenderOption
+	Theme                                                         Theme
+	CustomThemeFile                                               string
 }
 
 // NewPdfRenderer creates and configures an PdfRenderer object,
@@ -289,14 +289,13 @@ func NewPdfRenderer(params PdfRendererParams) *PdfRenderer {
 
 	switch r.Theme {
 	case DARK:
-	    r.SetDarkTheme()
+		r.SetDarkTheme()
 	case LIGHT:
-	    r.SetLightTheme()
+		r.SetLightTheme()
 	case CUSTOM:
-	    if params.CustomThemeFile != "" {
-		log.Printf("Custom: %s\n", params.CustomThemeFile)
-		r.SetCustomTheme(params.CustomThemeFile) 
-	    }
+		if params.CustomThemeFile != "" {
+			r.SetCustomTheme(params.CustomThemeFile)
+		}
 	}
 	r.Pdf.AddPage()
 	// set default font
@@ -326,12 +325,12 @@ func NewPdfRendererWithDefaultStyler(orient, papersz, pdfFile, tracerFile string
 		r.Normal = defaultStyler
 	})
 	params := PdfRendererParams{
-	    Orientation: orient, 
-	    Papersz: papersz, 
-	    PdfFile: pdfFile, 
-	    TracerFile: tracerFile,
-	    Opts: opts, 
-	    Theme: theme, 
+		Orientation: orient,
+		Papersz:     papersz,
+		PdfFile:     pdfFile,
+		TracerFile:  tracerFile,
+		Opts:        opts,
+		Theme:       theme,
 	}
 
 	return NewPdfRenderer(params)

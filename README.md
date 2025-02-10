@@ -16,11 +16,12 @@ Both of the above are documented at [Go Docs](http://godocs.org).
 
 ## Features
 
-- Syntax highlighting (for code blocks)
-- Dark and light themes
-- Pagination control (using horizontal lines - especially useful for presentations)
-- Page Footer (consisting of author, title and page number)
-- Support of non-Latin charsets and multiple fonts
+- [Syntax highlighting (for code blocks)](#syntax-highlighting)
+- [Dark and light themes](#custom-themes)
+- [Customised themes (by passing a JSON file to `md2pdf`)](#custom-themes)
+- [Support of non-Latin charsets and multiple fonts](#using-non-ascii-glyphsfonts)
+- [Pagination control (using horizontal lines - especially useful for presentations)](#additional-options)
+- [Page Footer (consisting of author, title and page number)](#additional-options)
 
 ## Supported Markdown elements
 
@@ -61,8 +62,6 @@ This is a planned fix; [see here](https://github.com/mandolyte/mdtopdf/issues/1)
 
 7. Tables are supported, but no attempt is made to ensure fit. You can, however, change the font size and spacing to make it smaller. See example.
 
-
-
 ## Installation 
 
 You can obtain the pre-built `md2pdf` binary for your OS and arch [here](https://github.com/mandolyte/mdtopdf/releases);
@@ -82,6 +81,13 @@ $ go install github.com/mandolyte/mdtopdf/cmd/md2pdf@latest
 `mdtopdf` supports colourised output via the [gohighlight module](https://github.com/jessp01/gohighlight).
 
 For examples, see `testdata/Markdown Documentation - Syntax.text` and `testdata/Markdown Documentation - Syntax.pdf`
+
+## Custom themes
+
+`md2pdf` supports both light and dark themes out of the box (use `--theme light` or `--theme dark` - no config required). 
+
+However, if you wish to customise the font faces, sizes and colours, you can use the JSONs in
+[custom_themes](./custom_themes) as a starting point. Edit to your liking and pass `--theme /path/to/json` to `md2pdf`
 
 ## Quick start
 

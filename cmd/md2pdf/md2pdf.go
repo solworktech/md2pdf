@@ -143,21 +143,21 @@ func main() {
 	themeFile := ""
 	if *themeArg == "dark" {
 		theme = mdtopdf.DARK
-	}else if _, err := os.Stat(*themeArg); err == nil {
+	} else if _, err := os.Stat(*themeArg); err == nil {
 		theme = mdtopdf.CUSTOM
 		themeFile = *themeArg
 	}
 
 	params := mdtopdf.PdfRendererParams{
-	    Orientation: *orientation, 
-	    Papersz: *pageSize, 
-	    PdfFile: *output, 
-	    TracerFile: *logFile,
-	    Opts: opts, 
-	    Theme: theme, 
-	    CustomThemeFile: themeFile,
-	    FontFile: *fontFile,
-	    FontName: *fontName,
+		Orientation:     *orientation,
+		Papersz:         *pageSize,
+		PdfFile:         *output,
+		TracerFile:      *logFile,
+		Opts:            opts,
+		Theme:           theme,
+		CustomThemeFile: themeFile,
+		FontFile:        *fontFile,
+		FontName:        *fontName,
 	}
 
 	pf := mdtopdf.NewPdfRenderer(params)
@@ -172,12 +172,12 @@ func main() {
 		pf.Pdf.AddFont(*fontName, "", *fontFile)
 		pf.Pdf.SetFont(*fontName, "", 12)
 		pf.Normal = mdtopdf.Styler{
-			Font: *fontName, 
+			Font:  *fontName,
 			Style: "",
-			Size: 12, Spacing: 2,
+			Size:  12, Spacing: 2,
 			TextColor: pf.Normal.TextColor,
 		}
-		
+
 	}
 
 	if *printFooter {
