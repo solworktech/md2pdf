@@ -1,0 +1,217 @@
+{
+  "Normal": {
+    "Font": "Arial",
+    "Style": "",
+    "Size": 12,
+    "Spacing": 2,
+    "TextColor": {
+      "Red": 255,
+      "Green": 255,
+      "Blue": 255
+    },
+    "FillColor": {
+      "Red": 0,
+      "Green": 0,
+      "Blue": 0
+    }
+  },
+  "Link": {
+    "Font": "Arial",
+    "Style": "b",
+    "Size": 12,
+    "Spacing": 2,
+    "TextColor": {
+      "Red": 100,
+      "Green": 149,
+      "Blue": 237
+    },
+    "FillColor": {
+      "Red": 0,
+      "Green": 0,
+      "Blue": 0
+    }
+  },
+  "Backtick": {
+    "Font": "Times",
+    "Style": "",
+    "Size": 12,
+    "Spacing": 2,
+    "TextColor": {
+      "Red": 211,
+      "Green": 211,
+      "Blue": 211
+    },
+    "FillColor": {
+      "Red": 32,
+      "Green": 35,
+      "Blue": 37
+    }
+  },
+  "Blockquote": {
+    "Font": "Arial",
+    "Style": "i",
+    "Size": 12,
+    "Spacing": 2,
+    "TextColor": {
+      "Red": 169,
+      "Green": 169,
+      "Blue": 169
+    },
+    "FillColor": {
+      "Red": 0,
+      "Green": 0,
+      "Blue": 0
+    }
+  },
+  "IndentValue": 0,
+  "H1": {
+    "Font": "Arial",
+    "Style": "b",
+    "Size": 24,
+    "Spacing": 5,
+    "TextColor": {
+      "Red": 169,
+      "Green": 169,
+      "Blue": 169
+    },
+    "FillColor": {
+      "Red": 0,
+      "Green": 0,
+      "Blue": 0
+    }
+  },
+  "H2": {
+    "Font": "Arial",
+    "Style": "b",
+    "Size": 21,
+    "Spacing": 5,
+    "TextColor": {
+      "Red": 169,
+      "Green": 169,
+      "Blue": 169
+    },
+    "FillColor": {
+      "Red": 0,
+      "Green": 0,
+      "Blue": 0
+    }
+  },
+  "H3": {
+    "Font": "Arial",
+    "Style": "b",
+    "Size": 20,
+    "Spacing": 5,
+    "TextColor": {
+      "Red": 169,
+      "Green": 169,
+      "Blue": 169
+    },
+    "FillColor": {
+      "Red": 0,
+      "Green": 0,
+      "Blue": 0
+    }
+  },
+  "H4": {
+    "Font": "Arial",
+    "Style": "b",
+    "Size": 18,
+    "Spacing": 5,
+    "TextColor": {
+      "Red": 169,
+      "Green": 169,
+      "Blue": 169
+    },
+    "FillColor": {
+      "Red": 0,
+      "Green": 0,
+      "Blue": 0
+    }
+  },
+  "H5": {
+    "Font": "Arial",
+    "Style": "b",
+    "Size": 16,
+    "Spacing": 5,
+    "TextColor": {
+      "Red": 169,
+      "Green": 169,
+      "Blue": 169
+    },
+    "FillColor": {
+      "Red": 0,
+      "Green": 0,
+      "Blue": 0
+    }
+  },
+  "H6": {
+    "Font": "Arial",
+    "Style": "b",
+    "Size": 14,
+    "Spacing": 5,
+    "TextColor": {
+      "Red": 169,
+      "Green": 169,
+      "Blue": 169
+    },
+    "FillColor": {
+      "Red": 0,
+      "Green": 0,
+      "Blue": 0
+    }
+  },
+  "THeader": {
+    "Font": "Arial",
+    "Style": "b",
+    "Size": 12,
+    "Spacing": 2,
+    "TextColor": {
+      "Red": 169,
+      "Green": 169,
+      "Blue": 169
+    },
+    "FillColor": {
+      "Red": 27,
+      "Green": 27,
+      "Blue": 27
+    }
+  },
+  "TBody": {
+    "Font": "Arial",
+    "Style": "",
+    "Size": 12,
+    "Spacing": 2,
+    "TextColor": {
+      "Red": 128,
+      "Green": 128,
+      "Blue": 128
+    },
+    "FillColor": {
+      "Red": 200,
+      "Green": 200,
+      "Blue": 200
+    }
+  },
+  "Code": {
+    "Font": "Times",
+    "Style": "",
+    "Size": 12,
+    "Spacing": 2,
+    "TextColor": {
+      "Red": 211,
+      "Green": 211,
+      "Blue": 211
+    },
+    "FillColor": {
+      "Red": 32,
+      "Green": 35,
+      "Blue": 37
+    }
+  },
+  "Theme": 3,
+  "BackgroundColor": {
+    "Red": 0,
+    "Green": 0,
+    "Blue": 0
+  }
+}

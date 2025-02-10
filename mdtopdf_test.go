@@ -44,11 +44,17 @@ func testit(inputf string, gohighlight bool, t *testing.T) {
 	var r *PdfRenderer
 	var opts []RenderOption
 	if gohighlight {
-		opts := []RenderOption{IsHorizontalRuleNewPage(true), SetSyntaxHighlightBaseDir("./highlight/syntax_files")}
-		r = NewPdfRenderer("", "", pdffile, tracerfile, opts, LIGHT)
-	} else {
-		r = NewPdfRenderer("", "", pdffile, tracerfile, opts, LIGHT)
+		opts = []RenderOption{IsHorizontalRuleNewPage(true), SetSyntaxHighlightBaseDir("./highlight/syntax_files")}
 	}
+	params := PdfRendererParams{
+		Orientation: "",
+		Papersz:     "",
+		PdfFile:     pdffile,
+		TracerFile:  tracerfile,
+		Opts:        opts,
+		Theme:       LIGHT,
+	}
+	r = NewPdfRenderer(params)
 	err = r.Process(content)
 	if err != nil {
 		t.Error(err)
