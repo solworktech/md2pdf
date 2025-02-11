@@ -74,7 +74,7 @@ $ go install github.com/mandolyte/mdtopdf/v2/cmd/md2pdf@latest
 Alternatively, install golang and run `go get`:
 
 ```
-$ go get github.com/mandolyte/mdtopdf
+$ go get github.com/mandolyte/mdtopdf/v2
 ```
 
 ## Syntax highlighting
