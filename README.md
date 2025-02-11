@@ -138,7 +138,7 @@ annotation name must match syntax base filename.*
   --page-size string
     	[A3 | A4 | A5] (default "A4")
   --theme string
-    	[light|dark] (default "light")
+        [light | dark | /path/to/custom/theme.json] (default "light")
   --title string
     	Presentation title
   --author string
