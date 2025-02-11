@@ -1,7 +1,9 @@
+---
 # This is an example .goreleaser.yml file with some sensible defaults.
 # Make sure to check the documentation at https://goreleaser.com
 before:
   hooks:
+    - git submodule update --remote  --init
     # You may remove this if you don't use go modules.
     - go mod tidy
     # you may remove this if you don't need go generate
@@ -25,7 +27,7 @@ builds:
 
 archives:
   - format: tar.gz
-    # this name template makes the OS and Arch compatible with the results of uname.
+    # this name template makes the OS and Arch compatible with `uname`.
     name_template: >-
       {{ .ProjectName }}_
       {{- title .Os }}_
