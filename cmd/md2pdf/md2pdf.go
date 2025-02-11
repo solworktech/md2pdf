@@ -14,7 +14,7 @@ import (
 	"strings"
 
 	"github.com/gomarkdown/markdown/parser"
-	"github.com/mandolyte/mdtopdf"
+	"github.com/mandolyte/mdtopdf/v2"
 	"golang.org/x/exp/slices"
 )
 

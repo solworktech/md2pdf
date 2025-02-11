@@ -1,4 +1,4 @@
-module github.com/mandolyte/mdtopdf
+module github.com/mandolyte/mdtopdf/v2
 
 go 1.18
 
