@@ -1,3 +1,4 @@
+---
 name: goreleaser
 
 on:
@@ -35,4 +36,3 @@ jobs:
           # Your GoReleaser Pro key, if you are using the 'goreleaser-pro'
           # distribution:
           # GORELEASER_KEY: ${{ secrets.GORELEASER_KEY }}
-

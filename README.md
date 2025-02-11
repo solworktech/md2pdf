@@ -114,7 +114,7 @@ with `--recursive`, you will have the `highlight` dir in its root. Alternatively
 existing clone:
 
 ```sh
-git submodule update --remote
+git submodule update --remote  --init
 ```
 
 *Note 1: the `cmd` folder has an example for the syntax highlighting. 

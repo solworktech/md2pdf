@@ -44,6 +44,50 @@ changelog:
       - '^docs:'
       - '^test:'
 
+nfpms:
+  - file_name_template: "{{ .ConventionalFileName }}"
+    id: packages
+    homepage: https://github.com/solworktech/mdtopdf
+    description: |-
+      Markdown to PDF converter
+      A CLI utility which, as the name implies, generates PDF from Markdown.
+      Features: syntax highlighting (for code blocks),
+      dark, light and custom themes,
+      pagination control (using horizontal lines - useful for presentations),
+      page Footer (consisting of author, title and page number),
+      support of non-Latin charsets and multiple fonts
+    maintainer: Jesse Portnoy <jesse@packman.io>
+    license: MIT
+    vendor: Solworktech
+    bindir: /usr/bin
+    section: utils
+    contents:
+      - src: ./custom_themes
+        dst: /usr/share/{{ .PackageName }}
+        expand: true
+        file_info:
+          mode: 0755
+      - src: ./highlight
+        dst: /usr/share/{{ .PackageName }}/syntax_highlight
+        expand: true
+        file_info:
+          mode: 0755
+          # mtime: "{{ .CommitDate }}"
+      - src: ./LICENSE
+        dst: /usr/share/doc/{{ .PackageName }}/copyright
+        expand: true
+        file_info:
+          mode: 0644
+          # mtime: "{{ .CommitDate }}"
+      - src: ./README.md
+        dst: /usr/share/doc/{{ .PackageName }}/
+        expand: true
+        file_info:
+          mode: 0644
+    formats:
+      - deb
+      - rpm
+      - archlinux
 # The lines beneath this are called `modelines`. See `:help modeline`
 # Feel free to remove those if you don't want/use them.
 # yaml-language-server: $schema=https://goreleaser.com/static/schema.json
