@@ -87,9 +87,9 @@ func main() {
 		opts = append(opts, mdtopdf.SetSyntaxHighlightBaseDir(*pathToSyntaxFiles))
 	} else {
 		if _, err := os.Stat("../../highlight/syntax_files"); err == nil {
-			opts = append(opts, mdtopdf.SetSyntaxHighlightBaseDir("/usr/share/mdtopdf/syntax_files"))
-		} else if _, err := os.Stat("/usr/share/mdtopdf/syntax_files"); err == nil {
 			opts = append(opts, mdtopdf.SetSyntaxHighlightBaseDir("../../highlight/syntax_files"))
+		} else if _, err := os.Stat("/usr/share/mdtopdf/syntax_files"); err == nil {
+			opts = append(opts, mdtopdf.SetSyntaxHighlightBaseDir("/usr/share/mdtopdf/syntax_files"))
 		}
 	}
 
