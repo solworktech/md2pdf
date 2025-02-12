@@ -86,7 +86,11 @@ func main() {
 	if *pathToSyntaxFiles != "" {
 		opts = append(opts, mdtopdf.SetSyntaxHighlightBaseDir(*pathToSyntaxFiles))
 	} else {
-		opts = append(opts, mdtopdf.SetSyntaxHighlightBaseDir("../../highlight/syntax_files"))
+		if _, err := os.Stat("../../highlight/syntax_files"); err == nil {
+			opts = append(opts, mdtopdf.SetSyntaxHighlightBaseDir("/usr/share/mdtopdf/syntax_files"))
+		} else if _, err := os.Stat("/usr/share/mdtopdf/syntax_files"); err == nil {
+			opts = append(opts, mdtopdf.SetSyntaxHighlightBaseDir("../../highlight/syntax_files"))
+		}
 	}
 
 	// get text for PDF
@@ -169,6 +173,8 @@ func main() {
 	pf.Extensions = parser.NoIntraEmphasis | parser.Tables | parser.FencedCode | parser.Autolink | parser.Strikethrough | parser.SpaceHeadings | parser.HeadingIDs | parser.BackslashLineBreak | parser.DefinitionLists
 
 	if *fontFile != "" && *fontName != "" {
+		fmt.Println(*fontFile)
+		// pf.Pdf.AddUTF8Font(*fontName, "", *fontFile)
 		pf.Pdf.AddFont(*fontName, "", *fontFile)
 		pf.Pdf.SetFont(*fontName, "", 12)
 		pf.Normal = mdtopdf.Styler{

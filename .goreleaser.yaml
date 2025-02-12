@@ -69,8 +69,8 @@ nfpms:
         expand: true
         file_info:
           mode: 0755
-      - src: ./highlight
-        dst: /usr/share/{{ .PackageName }}/syntax_highlight
+      - src: ./highlight/syntax_files
+        dst: /usr/share/{{ .PackageName }}/syntax_files
         expand: true
         file_info:
           mode: 0755
