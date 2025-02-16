@@ -34,34 +34,6 @@ Both of the above are documented at [Go Docs](http://godocs.org).
 - Links
 - Code blocks and backticked text
 
-## Tests
-
-The tests included in this repo (see the `testdata` folder) were taken from the BlackFriday package.
-They create PDF files and while the tests may complete
-without errors, visual inspection of the created PDF is the
-only way to determine if the tests *really* pass!
-
-The tests create log files that trace the [gomarkdown](https://github.com/gomarkdown/markdown) parser
-callbacks. This is a valuable debug tool showing each callback 
-and data provided in each while the AST is presented.
-
-## Limitations and Known Issues
-
-1. It is common for Markdown to include HTML. HTML is treated as a "code block". *There is no attempt to convert raw HTML to PDF.*
-
-2. Github-flavored Markdown permits strikethough using tildes. This is not supported at present by `fpdf` as a font style.
-
-3. The markdown link title, which would show when converted to HTML as hover-over text, is not supported. The generated PDF will show the actual URL that will be used if clicked, but this is a function of the PDF viewer.
-
-4. Currently all levels of unordered lists use a dash for the bullet. 
-This is a planned fix; [see here](https://github.com/solworktech/mdtopdf/issues/1).
-
-5. Definition lists are not supported (not sure that markdown supports them -- I need to research this)
-
-6. The following text features may be tweaked: font, size, spacing, style, fill color, and text color. These are exported and available via the `Styler` struct. Note that fill color only works when using `CellFormat()`. This is the case for: tables, codeblocks, and backticked text.
-
-7. Tables are supported, but no attempt is made to ensure fit. You can, however, change the font size and spacing to make it smaller. See example.
-
 ## Installation 
 
 You can obtain the pre-built `md2pdf` binary for your OS and arch
@@ -185,6 +157,34 @@ For a full example, run:
 $ go run md2pdf.go -i russian.md -o russian.pdf \
     --unicode-encoding cp1251 --font-file helvetica_1251.json --font-name Helvetica_1251
 ```
+
+## Tests
+
+The tests included in this repo (see the `testdata` folder) were taken from the BlackFriday package.
+They create PDF files and while the tests may complete
+without errors, visual inspection of the created PDF is the
+only way to determine if the tests *really* pass!
+
+The tests create log files that trace the [gomarkdown](https://github.com/gomarkdown/markdown) parser
+callbacks. This is a valuable debug tool showing each callback 
+and data provided in each while the AST is presented.
+
+## Limitations and Known Issues
+
+1. It is common for Markdown to include HTML. HTML is treated as a "code block". *There is no attempt to convert raw HTML to PDF.*
+
+2. Github-flavored Markdown permits strikethough using tildes. This is not supported at present by `fpdf` as a font style.
+
+3. The markdown link title, which would show when converted to HTML as hover-over text, is not supported. The generated PDF will show the actual URL that will be used if clicked, but this is a function of the PDF viewer.
+
+4. Currently all levels of unordered lists use a dash for the bullet. 
+This is a planned fix; [see here](https://github.com/solworktech/mdtopdf/issues/1).
+
+5. Definition lists are not supported (not sure that markdown supports them -- I need to research this)
+
+6. The following text features may be tweaked: font, size, spacing, style, fill color, and text color. These are exported and available via the `Styler` struct. Note that fill color only works when using `CellFormat()`. This is the case for: tables, codeblocks, and backticked text.
+
+7. Tables are supported, but no attempt is made to ensure fit. You can, however, change the font size and spacing to make it smaller. See example.
 
 
 ### Post release note 
