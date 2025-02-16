@@ -64,17 +64,12 @@ This is a planned fix; [see here](https://github.com/solworktech/mdtopdf/issues/
 
 ## Installation 
 
-You can obtain the pre-built `md2pdf` binary for your OS and arch [here](https://github.com/solworktech/mdtopdf/releases);
+You can obtain the pre-built `md2pdf` binary for your OS and arch
+[here](https://github.com/solworktech/mdtopdf/releases); 
+you can also install the `md2pdf` binary directly onto your `$GOBIN` dir with:
 
-You can also install the `md2pdf` binary directly onto your `$GOBIN` dir with:
 ```
 $ go install github.com/mandolyte/mdtopdf/v2/cmd/md2pdf@latest
-```
-
-Alternatively, install golang and run `go get`:
-
-```
-$ go get github.com/mandolyte/mdtopdf/v2
 ```
 
 ## Syntax highlighting
