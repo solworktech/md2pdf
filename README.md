@@ -44,6 +44,12 @@ you can also install the `md2pdf` binary directly onto your `$GOBIN` dir with:
 $ go install github.com/mandolyte/mdtopdf/v2/cmd/md2pdf@latest
 ```
 
+`md2pdf` is also available via [Homebrew](https://formulae.brew.sh/formula/md2pdf):
+
+```sh
+$ brew install md2pdf
+```
+
 ## Syntax highlighting
 
 `mdtopdf` supports colourised output via the [gohighlight module](https://github.com/jessp01/gohighlight).
