@@ -9,8 +9,8 @@
 A CLI utility which, as the name implies, generates PDF from Markdown.
 
 This package depends on two other packages:
-- The [gomarkdown](https://github.com/gomarkdown/markdown) parser to read the markdown source
-- The [fpdf](https://github.com/go-pdf/fpdf) package to generate the PDF
+- [gomarkdown](https://github.com/gomarkdown/markdown) parser to read the markdown source
+- [fpdf](https://github.com/go-pdf/fpdf) to generate the PDF
 
 ## Features
 
