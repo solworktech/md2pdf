@@ -74,7 +74,7 @@ nfpms:
         expand: true
         file_info:
           mode: 0755
-          # mtime: "{{ .CommitDate }}"
+        type: "config|noreplace"
       - src: ./LICENSE
         dst: /usr/share/doc/{{ .PackageName }}/copyright
         expand: true
