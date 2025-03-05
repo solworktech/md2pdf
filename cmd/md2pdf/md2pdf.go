@@ -33,8 +33,8 @@ var pageSize = flag.String("page-size", "A4", "[A3 | A4 | A5]")
 var orientation = flag.String("orientation", "portrait", "[portrait | landscape]")
 var logFile = flag.String("log-file", "", "Path to log file")
 var help = flag.Bool("help", false, "Show usage message")
-var version = flag.Bool("version", false, "Print version")
-var mdtopdfVersion = "dev"
+var ver = flag.Bool("version", false, "Print version")
+var version = "dev"
 var _, fileName, fileLine, ok = runtime.Caller(0)
 
 var opts []mdtopdf.RenderOption
@@ -73,8 +73,8 @@ func main() {
 		return
 	}
 
-	if *version {
-		fmt.Println(mdtopdfVersion)
+	if *ver {
+		fmt.Println(version)
 		return
 	}
 
@@ -225,7 +225,7 @@ func main() {
 
 func usage(msg string) {
 	fmt.Println(msg + "\n")
-	fmt.Printf("Usage: %s (%s) [options]\n", filepath.Base(fileName), mdtopdfVersion)
+	fmt.Printf("Usage: %s (%s) [options]\n", filepath.Base(fileName), version)
 	flag.PrintDefaults()
 	os.Exit(0)
 }
