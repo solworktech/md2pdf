@@ -41,50 +41,49 @@ However, if you wish to customise the font faces, sizes and colours, you can use
 ## Synopsis
 
 ```sh
+  -author string
+    	Author; used if -footer is passed
+  -font-file string
+    	path to font file to use
+  -font-name string
+    	Font name ID; e.g 'Helvetica-1251'
+  -help
+    	Show usage message
   -i string
-	Input filename, dir consisting of .md|.markdown files or HTTP(s) URL; default is os.Stdin
+    	Input filename, dir consisting of .md|.markdown files or HTTP(s) URL; default is os.Stdin
+  -log-file string
+    	Path to log file
+  -new-page-on-hr
+    	Interpret HR as a new page; useful for presentations
   -o string
     	Output PDF filename; required
+  -orientation string
+    	[portrait | landscape] (default "portrait")
+  -page-size string
+    	[A3 | A4 | A5] (default "A4")
   -s string
     	Path to github.com/jessp01/gohighlight/syntax_files
-  --new-page-on-hr
-    	Interpret HR as a new page; useful for presentations
-  --page-size string
-    	[A3 | A4 | A5] (default "A4")
-  --theme string
-        [light | dark | /path/to/custom/theme.json] (default "light")
-  --title string
+  -theme string
+    	[light | dark | /path/to/custom/theme.json] (default "light")
+  -title string
     	Presentation title
-  --author string
-    	Author; used if -footer is passed
-  --font-file string
-    	path to font file to use
-  --font-name string
-    	Font name ID; e.g 'Helvetica-1251'
-  --unicode-encoding string
+  -unicode-encoding string
     	e.g 'cp1251'
-  --with-footer
+  -version
+    	Print version and build info
+  -with-footer
     	Print doc footer (author  title  page number)
-  --help
-    	Show usage message
 ```
 
 ## Examples
 
-```
 $ md2pdf -i doc.md -o doc.pdf
-```
 
 To benefit from Syntax highlighting, invoke thusly:
-
-```
 $ md2pdf -i syn_doc.md -s /usr/share/mdtopdf/syntax_files -o doc.pdf
-```
 
 To convert multiple MD files into a single PDF, use:
-```
 $ md2pdf -i /path/to/md/directory -o doc.pdf
-```
 
 For example, the below will:
 
@@ -94,18 +93,14 @@ For example, the below will:
 - Start a new page when encountering a HR (`---`); useful for creating presentations
 - Print a footer (`author name, title, page number`)
 
-```sh
 $ go run md2pdf.go  -i /path/to/md \
     -o /path/to/pdf --title "My Grand Title" --author "Random Bloke" \
     --theme dark --new-page-on-hr --with-footer
-```
 
 ## Using non-ASCII Glyphs/Fonts
 
 For a full example, run:
 
-```sh
 $ md2pdf -i russian.md -o russian.pdf \
     --unicode-encoding cp1251 --font-file helvetica_1251.json --font-name Helvetica_1251
-```
 

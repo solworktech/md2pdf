@@ -76,7 +76,7 @@ func main() {
 	}
 
 	if *ver {
-		fmt.Printf("md2pdf version: %s, commit: %s, built at: %s", version, commit, date)
+		fmt.Printf("md2pdf version: %s, commit: %s, built on: %s\n", version, commit, date)
 		return
 	}
 

@@ -38,7 +38,7 @@ You can obtain the pre-built `md2pdf` binary for your OS and arch
 [here](https://github.com/solworktech/mdtopdf/releases); 
 you can also install the `md2pdf` binary directly onto your `$GOBIN` dir with:
 
-```
+```sh
 $ go install github.com/mandolyte/mdtopdf/v2/cmd/md2pdf@latest
 ```
 
@@ -99,32 +99,38 @@ annotation name must match syntax base filename.*
 ### Additional options
 
 ```sh
+  -author string
+    	Author; used if -footer is passed
+  -font-file string
+    	path to font file to use
+  -font-name string
+    	Font name ID; e.g 'Helvetica-1251'
+  -help
+    	Show usage message
   -i string
-	Input filename, dir consisting of .md|.markdown files or HTTP(s) URL; default is os.Stdin
+    	Input filename, dir consisting of .md|.markdown files or HTTP(s) URL; default is os.Stdin
+  -log-file string
+    	Path to log file
+  -new-page-on-hr
+    	Interpret HR as a new page; useful for presentations
   -o string
     	Output PDF filename; required
+  -orientation string
+    	[portrait | landscape] (default "portrait")
+  -page-size string
+    	[A3 | A4 | A5] (default "A4")
   -s string
     	Path to github.com/jessp01/gohighlight/syntax_files
-  --new-page-on-hr
-    	Interpret HR as a new page; useful for presentations
-  --page-size string
-    	[A3 | A4 | A5] (default "A4")
-  --theme string
-        [light | dark | /path/to/custom/theme.json] (default "light")
-  --title string
+  -theme string
+    	[light | dark | /path/to/custom/theme.json] (default "light")
+  -title string
     	Presentation title
-  --author string
-    	Author; used if -footer is passed
-  --font-file string
-    	path to font file to use
-  --font-name string
-    	Font name ID; e.g 'Helvetica-1251'
-  --unicode-encoding string
+  -unicode-encoding string
     	e.g 'cp1251'
-  --with-footer
+  -version
+    	Print version and build info
+  -with-footer
     	Print doc footer (author  title  page number)
-  --help
-    	Show usage message
 ```
 
 For example, the below will:
