@@ -33,8 +33,10 @@ var pageSize = flag.String("page-size", "A4", "[A3 | A4 | A5]")
 var orientation = flag.String("orientation", "portrait", "[portrait | landscape]")
 var logFile = flag.String("log-file", "", "Path to log file")
 var help = flag.Bool("help", false, "Show usage message")
-var ver = flag.Bool("version", false, "Print version")
+var ver = flag.Bool("version", false, "Print version and build info")
 var version = "dev"
+var commit = "none"
+var date = "unknown"
 var _, fileName, fileLine, ok = runtime.Caller(0)
 
 var opts []mdtopdf.RenderOption
@@ -74,7 +76,7 @@ func main() {
 	}
 
 	if *ver {
-		fmt.Println(version)
+		fmt.Printf("md2pdf version: %s, commit: %s, built at: %s", version, commit, date)
 		return
 	}
 
