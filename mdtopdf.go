@@ -128,6 +128,7 @@ type PdfRenderer struct {
 	BackgroundColor           Color
 	documentMatter            ast.DocumentMatters // keep track of front/main/back matter.
 	Extensions                parser.Extensions
+	ColumnWidths              map[ast.Node][]float64
 }
 
 // SetLightTheme sets theme to 'light'
@@ -376,9 +377,64 @@ func (r *PdfRenderer) Run(content []byte) error {
 
 	p := parser.NewWithExtensions(r.Extensions)
 	doc := markdown.Parse(s, p)
+
+	setColumnWidths(doc, r)
 	_ = markdown.Render(doc, r)
 
 	return nil
+}
+
+// Parses all tables and sets the column width to the longest string in that column
+func setColumnWidths(doc ast.Node, r *PdfRenderer) {
+	columnWidths := map[ast.Node][]float64{}
+	intable := false
+	inheader := true
+	cellnum := 0
+	lengths := []float64{}
+	textlength := float64(0)
+	ast.WalkFunc(doc, func(node ast.Node, entering bool) ast.WalkStatus {
+		switch n := node.(type) {
+		case *ast.Table:
+			if entering {
+				intable = true
+			} else {
+				intable = false
+				columnWidths[node] = lengths
+			}
+
+		case *ast.TableHeader:
+			inheader = entering
+			if entering {
+				lengths = []float64{}
+			}
+		case *ast.TableRow:
+			if entering {
+				cellnum = 0
+			}
+		case *ast.TableCell:
+			if entering {
+				if inheader {
+					lengths = append(lengths, 0)
+				}
+			} else {
+				textlength += textlength * 0.2
+
+				currentMax := lengths[cellnum]
+				if textlength > currentMax {
+					lengths[cellnum] = textlength
+				}
+				textlength = 0
+				cellnum++
+			}
+		case *ast.Text:
+			if entering && intable {
+				l := r.Pdf.GetStringWidth(string(n.Literal))
+				textlength += l
+			}
+		}
+		return ast.GoToNext
+	})
+	r.ColumnWidths = columnWidths
 }
 
 // UpdateParagraphStyler - update with default styler
