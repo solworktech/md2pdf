@@ -28,7 +28,7 @@ This package depends on two other packages:
 - Ordered and unordered lists
 - Nested lists
 - Images
-- Tables (but see limitations below)
+- Tables
 - Links
 - Code blocks and backticked text
 
