@@ -49,40 +49,17 @@ func (r *PdfRenderer) processText(node *ast.Text) {
 	}
 	r.tracer("Text", s)
 
+	if incell {
+		r.cs.peek().cellInnerString += s
+		r.cs.peek().cellInnerStringStyle = &currentStyle
+		return
+	}
 	switch node.Parent.(type) {
 
 	case *ast.Link:
 		r.writeLink(currentStyle, s, r.cs.peek().destination)
 	case *ast.Heading:
 		r.write(currentStyle, s)
-	case *ast.TableCell:
-		if r.cs.peek().isHeader {
-			r.setStyler(currentStyle)
-			// get the string width of header value
-			initialWidth := r.Pdf.GetStringWidth(s)
-			/* if initialWidth == 0 {
-			    initialWidth = 30
-			}
-			log.Println(s + ":")
-			log.Println(initialWidth)*/
-			hw := initialWidth + (2 * r.em)
-			// now append it
-			cellwidths = append(cellwidths, hw)
-			// now write it...
-			h, _ := r.Pdf.GetFontSize()
-			h += currentStyle.Spacing
-			r.tracer("... table header cell",
-				fmt.Sprintf("Width=%v, height=%v", hw, h))
-
-			r.Pdf.CellFormat(hw, h, s, "1", 0, "C", true, 0, "")
-		} else {
-			r.setStyler(currentStyle)
-			hw := cellwidths[curdatacell]
-			h := currentStyle.Size + currentStyle.Spacing
-			r.tracer("... table body cell",
-				fmt.Sprintf("Width=%v, height=%v", hw, h))
-			r.Pdf.CellFormat(hw, h, s, "LR", 0, "", fill, 0, "")
-		}
 	case *ast.BlockQuote:
 		if r.NeedBlockquoteStyleUpdate {
 			r.tracer("Text BlockQuote", s)
@@ -300,8 +277,8 @@ func (r *PdfRenderer) processEmph(node ast.Node, entering bool) {
 
 func (r *PdfRenderer) processStrong(node ast.Node, entering bool) {
 	if entering {
-		r.tracer("Strong (entering)", "")
 		r.cs.peek().textStyle.Style += "b"
+		r.tracer("Strong (entering)", "")
 	} else {
 		r.tracer("Strong (leaving)", "")
 		r.cs.peek().textStyle.Style = strings.ReplaceAll(
@@ -615,6 +592,7 @@ func (r *PdfRenderer) processTable(node ast.Node, entering bool) {
 		r.cr()
 		r.cs.push(x)
 		fill = false
+		cellwidths = r.ColumnWidths[node]
 	} else {
 		wSum := 0.0
 		for _, w := range cellwidths {
@@ -635,7 +613,6 @@ func (r *PdfRenderer) processTableHead(node ast.Node, entering bool) {
 			textStyle: r.THeader, listkind: notlist,
 			leftMargin: r.cs.peek().leftMargin}
 		r.cs.push(x)
-		cellwidths = make([]float64, 0)
 	} else {
 		r.cs.pop()
 		r.tracer("TableHead (leaving)", "")
@@ -694,8 +671,27 @@ func (r *PdfRenderer) processTableCell(node ast.TableCell, entering bool) {
 			x.isHeader = false
 		}
 		r.cs.push(x)
+		incell = true
 	} else {
-		r.cs.pop()
+		incell = false
+		cs := r.cs.pop()
+		currentStyle := cs.textStyle
+		if cs.cellInnerStringStyle != nil {
+			currentStyle = *cs.cellInnerStringStyle
+		}
+		s := cs.cellInnerString
+		w := cellwidths[curdatacell]
+		if cs.isHeader {
+			h, _ := r.Pdf.GetFontSize()
+			h += currentStyle.Spacing
+			r.tracer("... table header cell",
+				fmt.Sprintf("Width=%v, height=%v", w, h))
+
+			r.Pdf.CellFormat(w, h, s, "1", 0, "C", true, 0, "")
+		} else {
+			h := currentStyle.Size + currentStyle.Spacing
+			r.Pdf.CellFormat(w, h, s, "LR", 0, "", fill, 0, "")
+		}
 		r.tracer("TableCell (leaving)", "")
 		curdatacell++
 	}

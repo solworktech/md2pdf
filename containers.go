@@ -34,6 +34,7 @@ const (
 var cellwidths []float64
 var curdatacell int
 var fill = false
+var incell = false
 
 func (n listType) String() string {
 	switch n {
@@ -63,6 +64,10 @@ type containerState struct {
 
 	// populated if table cell
 	isHeader bool
+
+	// populated if table cell (apply styles first)
+	cellInnerString      string
+	cellInnerStringStyle *Styler
 }
 
 type states struct {
