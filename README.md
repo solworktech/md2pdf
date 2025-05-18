@@ -181,18 +181,11 @@ and data provided in each while the AST is presented.
 
 ## Limitations and Known Issues
 
-1. It is common for Markdown to include HTML. HTML is treated as a "code block". *There is no attempt to convert raw HTML to PDF.*
-
-2. Github-flavored Markdown permits strikethough using tildes. This is not supported at present by `fpdf` as a font style.
-
-3. The markdown link title, which would show when converted to HTML as hover-over text, is not supported. The generated PDF will show the actual URL that will be used if clicked, but this is a function of the PDF viewer.
-
-4. Currently all levels of unordered lists use a dash for the bullet. 
-This is a planned fix; [see here](https://github.com/solworktech/mdtopdf/issues/1).
-
-5. Definition lists are not supported (not sure that markdown supports them -- I need to research this)
-
-6. The following text features may be tweaked: font, size, spacing, style, fill color, and text color. These are exported and available via the `Styler` struct. Note that fill color only works when using `CellFormat()`. This is the case for: tables, codeblocks, and backticked text.
+- It is common for Markdown to include HTML. HTML is treated as a "code block". *There is no attempt to convert raw HTML to PDF.*
+- Github-flavored Markdown permits strikethough using tildes. This is not supported at present by `fpdf` as a font style.
+- The markdown link title, which would show when converted to HTML as hover-over text, is not supported. The generated PDF will show the actual URL that will be used if clicked, but this is a function of the PDF viewer.
+- Definition lists are not supported (not sure that markdown supports them -- I need to research this)
+- The following text features may be tweaked: font, size, spacing, style, fill color, and text color. These are exported and available via the `Styler` struct. Note that fill color only works when using `CellFormat()`. This is the case for: tables, codeblocks, and backticked text.
 
 
 ### Post release note 
