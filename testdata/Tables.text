@@ -7,3 +7,13 @@ This is a simple table:
 | field 1 | something      |
 | field 2 | something else |
 
+Here is another table, with more content in the cells:
+
+| id | process_name |               window_name                | duration |
+|----|--------------|------------------------------------------|----------|
+| 1  | lxterminal   | devilspie2                               | 00:00:02 |
+| 2  | firefox-esr  | jessp01/devilspie2: Devilspie2 is an X w | 00:00:10 |
+|    |              | indow (Lua) hooks mechanism; it supports |          |
+|    |              |  the following events: window opened,    |          |
+|    |              | closed, focused and title changed        |          |
+| 4  | firefox-esr  | Watch The Big Bang Theory - Season 6     | 00:00:05 |
