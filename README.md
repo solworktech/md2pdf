@@ -194,8 +194,6 @@ This is a planned fix; [see here](https://github.com/solworktech/mdtopdf/issues/
 
 6. The following text features may be tweaked: font, size, spacing, style, fill color, and text color. These are exported and available via the `Styler` struct. Note that fill color only works when using `CellFormat()`. This is the case for: tables, codeblocks, and backticked text.
 
-7. Tables are supported, but no attempt is made to ensure fit. You can, however, change the font size and spacing to make it smaller. See example.
-
 
 ### Post release note 
 
