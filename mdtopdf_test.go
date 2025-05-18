@@ -42,7 +42,6 @@ func testit(inputf string, gohighlight bool, t *testing.T) {
 		t.Errorf("%v:%v", input, err)
 	}
 
-	//var r *PdfRenderer
 	var opts []RenderOption
 	if gohighlight {
 		opts = []RenderOption{IsHorizontalRuleNewPage(true), SetSyntaxHighlightBaseDir("./highlight/syntax_files")}
