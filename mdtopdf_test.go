@@ -20,11 +20,11 @@
 package mdtopdf
 
 import (
+	"github.com/gomarkdown/markdown/parser"
 	"os"
 	"path"
 	"strings"
 	"testing"
-	"github.com/gomarkdown/markdown/parser"
 )
 
 func testit(inputf string, gohighlight bool, t *testing.T) {
@@ -47,12 +47,12 @@ func testit(inputf string, gohighlight bool, t *testing.T) {
 		opts = []RenderOption{IsHorizontalRuleNewPage(true), SetSyntaxHighlightBaseDir("./highlight/syntax_files")}
 	}
 	params := PdfRendererParams{
-		Orientation: "",
-		Papersz:     "",
-		PdfFile:     pdffile,
-		TracerFile:  tracerfile,
-		Opts:        opts,
-		Theme:       LIGHT,
+		Orientation:     "",
+		Papersz:         "",
+		PdfFile:         pdffile,
+		TracerFile:      tracerfile,
+		Opts:            opts,
+		Theme:           LIGHT,
 		CustomThemeFile: "",
 		FontFile:        "",
 		FontName:        "",
