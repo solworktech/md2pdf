@@ -917,7 +917,7 @@
 -[Heading (leaving)] 
 -[cr()] LH=27
 [Unordered List (entering)] Container
-  ListItem 'flags=start end'
+  ListItem 'flags=has_block start'
     Paragraph
       Text 'Tab'
     List 'tight flags=start'
@@ -928,6 +928,19 @@
           ListItem 'flags=start'
             Paragraph
               Text 'Tab'
+  ListItem 'flags=has_block'
+    Paragraph
+      Text 'Hello'
+    List 'tight flags=start'
+      ListItem 'flags=start'
+        Paragraph
+          Text 'Hi'
+      ListItem
+        Paragraph
+          Text 'Hey'
+  ListItem 'flags=has_block end'
+    Paragraph
+      Text 'Yo'
 
 [... List Left Margin] set to 58.338
 -[Unordered Item (entering) #1] Container
@@ -1031,8 +1044,100 @@
           Paragraph
             Text 'Tab'
 
+-[Unordered Item (entering) #2] Container
+  Paragraph
+    Text 'Hello'
+  List 'tight flags=start'
+    ListItem 'flags=start'
+      Paragraph
+        Text 'Hi'
+    ListItem
+      Paragraph
+        Text 'Hey'
+
+-[cr()] LH=14
+--[Paragraph (entering)] 
+--[... Margins (left, top, right, bottom:] 98.322 28.35 28.35 56.7
+--[First Para within a list] breaking
+--[Text] Hello
+--[Paragraph (leaving)] 
+--[... Margins (left, top, right, bottom:] 98.322 28.35 28.35 56.7
+--[Unordered List (entering)] Container
+  ListItem 'flags=start'
+    Paragraph
+      Text 'Hi'
+  ListItem
+    Paragraph
+      Text 'Hey'
+
+--[... List Left Margin] set to 88.326
+---[Unordered Item (entering) #1] Container
+  Paragraph
+    Text 'Hi'
+
+---[cr()] LH=14
+----[Paragraph (entering)] 
+----[... Margins (left, top, right, bottom:] 128.31 28.35 28.35 56.7
+----[First Para within a list] breaking
+----[Text] Hi
+----[Paragraph (leaving)] 
+----[... Margins (left, top, right, bottom:] 128.31 28.35 28.35 56.7
+----[Unordered Item (leaving)] Container
+  Paragraph
+    Text 'Hi'
+
+---[Unordered Item (entering) #2] Container
+  Paragraph
+    Text 'Hey'
+
+---[cr()] LH=14
+----[Paragraph (entering)] 
+----[... Margins (left, top, right, bottom:] 128.31 28.35 28.35 56.7
+----[First Para within a list] breaking
+----[Text] Hey
+----[Paragraph (leaving)] 
+----[... Margins (left, top, right, bottom:] 128.31 28.35 28.35 56.7
+----[Unordered Item (leaving)] Container
+  Paragraph
+    Text 'Hey'
+
+---[Unordered List (leaving)] Container
+  ListItem 'flags=start'
+    Paragraph
+      Text 'Hi'
+  ListItem
+    Paragraph
+      Text 'Hey'
+
+---[... Reset List Left Margin] re-set to 58.337999999999994
+--[Unordered Item (leaving)] Container
+  Paragraph
+    Text 'Hello'
+  List 'tight flags=start'
+    ListItem 'flags=start'
+      Paragraph
+        Text 'Hi'
+    ListItem
+      Paragraph
+        Text 'Hey'
+
+-[Unordered Item (entering) #3] Container
+  Paragraph
+    Text 'Yo'
+
+-[cr()] LH=14
+--[Paragraph (entering)] 
+--[... Margins (left, top, right, bottom:] 98.322 28.35 28.35 56.7
+--[First Para within a list] breaking
+--[Text] Yo
+--[Paragraph (leaving)] 
+--[... Margins (left, top, right, bottom:] 98.322 28.35 28.35 56.7
+--[Unordered Item (leaving)] Container
+  Paragraph
+    Text 'Yo'
+
 -[Unordered List (leaving)] Container
-  ListItem 'flags=start end'
+  ListItem 'flags=has_block start'
     Paragraph
       Text 'Tab'
     List 'tight flags=start'
@@ -1043,6 +1148,19 @@
           ListItem 'flags=start'
             Paragraph
               Text 'Tab'
+  ListItem 'flags=has_block'
+    Paragraph
+      Text 'Hello'
+    List 'tight flags=start'
+      ListItem 'flags=start'
+        Paragraph
+          Text 'Hi'
+      ListItem
+        Paragraph
+          Text 'Hey'
+  ListItem 'flags=has_block end'
+    Paragraph
+      Text 'Yo'
 
 -[... Reset List Left Margin] re-set to 28.35
 [cr()] LH=14

@@ -31,10 +31,10 @@ func testit(inputf string, gohighlight bool, t *testing.T) {
 	inputd := "./testdata/"
 	input := path.Join(inputd, inputf)
 
-	tracerfile := path.Join(inputd, strings.TrimSuffix(path.Base(input), ".text"))
+	tracerfile := path.Join(inputd, strings.TrimSuffix(path.Base(input), path.Ext(input)))
 	tracerfile += ".log"
 
-	pdffile := path.Join(inputd, strings.TrimSuffix(path.Base(input), ".text"))
+	pdffile := path.Join(inputd, strings.TrimSuffix(path.Base(input), path.Ext(input)))
 	pdffile += ".pdf"
 
 	content, err := os.ReadFile(input)
@@ -98,7 +98,7 @@ func TestInlineLinks(t *testing.T) {
 }
 
 func TestLists(t *testing.T) {
-	testit("Ordered and unordered lists.text", false, t)
+	testit("Ordered and unordered lists.md", false, t)
 }
 
 func TestStringEmph(t *testing.T) {

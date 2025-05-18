@@ -241,11 +241,18 @@ func (r *PdfRenderer) processItem(node ast.ListItem, entering bool) {
 		r.cs.push(x)
 		if r.cs.peek().listkind == unordered {
 			tr := r.Pdf.UnicodeTranslatorFromDescriptor("")
-			r.Pdf.CellFormat(3*r.em, r.Normal.Size+r.Normal.Spacing,
-				tr("•"),
+			bulletChar := tr("•")
+			currFontSize, _ := r.Pdf.GetFontSize()
+			if node.BulletChar != 45 { // if the bullet char is not '-'
+			    bulletChar = tr("▪")
+			    r.Pdf.SetFont("", "", 25)
+			}
+			r.Pdf.CellFormat(4*r.em, r.Normal.Size + r.Normal.Spacing,
+				bulletChar,
 				"", 0, "RB", false, 0, "")
+			r.Pdf.SetFont("", "", currFontSize)
 		} else if r.cs.peek().listkind == ordered {
-			r.Pdf.CellFormat(3*r.em, r.Normal.Size+r.Normal.Spacing,
+			r.Pdf.CellFormat(4*r.em, r.Normal.Size+r.Normal.Spacing,
 				fmt.Sprintf("%v.", r.cs.peek().itemNumber),
 				"", 0, "RB", false, 0, "")
 		}
