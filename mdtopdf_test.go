@@ -24,6 +24,7 @@ import (
 	"path"
 	"strings"
 	"testing"
+	"github.com/gomarkdown/markdown/parser"
 )
 
 func testit(inputf string, gohighlight bool, t *testing.T) {
@@ -41,7 +42,7 @@ func testit(inputf string, gohighlight bool, t *testing.T) {
 		t.Errorf("%v:%v", input, err)
 	}
 
-	var r *PdfRenderer
+	//var r *PdfRenderer
 	var opts []RenderOption
 	if gohighlight {
 		opts = []RenderOption{IsHorizontalRuleNewPage(true), SetSyntaxHighlightBaseDir("./highlight/syntax_files")}
@@ -53,8 +54,12 @@ func testit(inputf string, gohighlight bool, t *testing.T) {
 		TracerFile:  tracerfile,
 		Opts:        opts,
 		Theme:       LIGHT,
+		CustomThemeFile: "",
+		FontFile:        "",
+		FontName:        "",
 	}
-	r = NewPdfRenderer(params)
+	r := NewPdfRenderer(params)
+	r.Extensions = parser.NoIntraEmphasis | parser.Tables | parser.FencedCode | parser.Autolink | parser.Strikethrough | parser.SpaceHeadings | parser.HeadingIDs | parser.BackslashLineBreak | parser.DefinitionLists
 	err = r.Process(content)
 	if err != nil {
 		t.Error(err)
