@@ -42,7 +42,7 @@ However, if you wish to customise the font faces, sizes and colours, you can use
 
 ```sh
   -author string
-    	Author; used if -footer is passed
+    	Author's name; used if -footer is passed
   -font-file string
     	path to font file to use
   -font-name string
@@ -72,7 +72,7 @@ However, if you wish to customise the font faces, sizes and colours, you can use
   -version
     	Print version and build info
   -with-footer
-    	Print doc footer (author  title  page number)
+    	Print doc footer (<author> <title> <page number>)
 ```
 
 ## Examples
