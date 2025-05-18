@@ -52,7 +52,8 @@ $ brew install md2pdf
 
 `mdtopdf` supports colourised output via the [gohighlight module](https://github.com/jessp01/gohighlight).
 
-For examples, see [testdata/Markdown Documentation - Syntax.text](testdata/Markdown Documentation - Syntax.text) and [testdata/Markdown Documentation - Syntax.pdf](testdata/Markdown Documentation - Syntax.pdf)
+For examples, see [testdata/syntax_highlighting.md](./testdata/syntax_highlighting.md) and 
+[testdata/syntax_highlighting.pdf](./testdata/syntax_highlighting.pdf)
 
 ## Custom themes
 

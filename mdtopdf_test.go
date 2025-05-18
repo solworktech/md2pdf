@@ -74,11 +74,11 @@ func TestMarkdownDocumenationBasic(t *testing.T) {
 }
 
 func TestMarkdownDocumenationSyntax(t *testing.T) {
-	testit("Markdown Documentation - Syntax.text", false, t)
+	testit("syntax.md", false, t)
 }
 
 func TestMarkdownDocumenationColourSyntax(t *testing.T) {
-	testit("Markdown Documentation - Colour.text", true, t)
+	testit("syntax_highlighting.md", true, t)
 }
 
 func TestImage(t *testing.T) {
