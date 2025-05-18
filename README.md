@@ -99,7 +99,7 @@ annotation name must match the syntax base filename.*
 
 ```sh
   -author string
-    	Author's name; used if -footer is passed
+    	Author name; used if -footer is passed
   -font-file string
     	path to font file to use
   -font-name string
