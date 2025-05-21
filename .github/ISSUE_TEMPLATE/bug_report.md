@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Create a report to help us improve
+about: Bug description
 title: ''
 labels: ''
 assignees: ''
@@ -22,5 +22,5 @@ Output:
 [ ] I've attached an input sample (MD file)
 
 **Expected behavior**
-A clear and concise description of what you expected to happen (unless the above makes it obvious, in which case, you
-can remove this section).
+A clear and concise description of what you expected to happen 
+(unless the above makes it obvious, in which case, you can remove this section).
