@@ -186,6 +186,34 @@ and the data provided while the AST is presented.
 - Definition lists are not supported
 - The following text features may be tweaked: font, size, spacing, style, fill colour, and text colour. These are exported and available via the `Styler` struct. Note that fill colour only works when using `CellFormat()`. This is the case for tables, code blocks, and backticked text.
 
+## Contributions
+
+- Set up and run pre-commit hooks:
+
+```sh
+# Install the needed GO packages:
+go install github.com/go-critic/go-critic/cmd/gocritic@latest
+go install golang.org/x/tools/cmd/goimports@latest
+go install golang.org/x/lint/golint@latest
+go install github.com/gordonklaus/ineffassign@latest
+
+# Install the `pre-commit` util:
+pip install pre-commit
+
+# Generate `.git/hooks/pre-commit`:
+pre-commit install
+```
+
+Following that, these tests will run every time you invoke `git commit`:
+```sh
+go fmt...................................................................Passed
+go imports...............................................................Passed
+go vet...................................................................Passed
+go lint..................................................................Passed
+go-critic................................................................Passed
+```
+
+- Submit a pull request and include a succinct description of the feature or issue it addresses 
 
 [license]: ./LICENSE
 [badge-license]: https://img.shields.io/github/license/solworktech/mdtopdf.svg
