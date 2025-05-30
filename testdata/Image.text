@@ -21,7 +21,7 @@ That is:
     the image, and an optional `title` attribute enclosed in double
     or single quotes.
 
-Here is the first picture: ![from https://github.com/go-pdf/fpdf/tree/master/image](./image/fpdf.png)
+Here is the first picture: ![from https://codeberg.org/go-pdf/fpdf/src/branch/main/image](./image/fpdf.png)
 
 Here is the second picture:
 ![from https://github.com/egonelbre/gophers](./image/hiking.png "Optional title")

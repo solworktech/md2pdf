@@ -151,7 +151,7 @@
 [Text] Here is the first picture: 
 [cr()] LH=14
 [Image (entering)] Destination[./image/fpdf.png] Title[]
-[Text] from https://github.com/go-pdf/fpdf/tree/master/image
+[Text] from https://codeberg.org/go-pdf/fpdf/src/branch/main/image
 [Image (leaving)] 
 [Paragraph (leaving)] 
 [... Margins (left, top, right, bottom:] 28.35 28.35 28.35 56.7

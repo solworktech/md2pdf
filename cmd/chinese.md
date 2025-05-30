@@ -78,7 +78,7 @@
 > 返回“工作”；
 > }
 
-这是 fpdf 徽标（内联）：![来自 https://github.com/go-pdf/fpdf/tree/master/image](../image/fpdf.png)
+这是 fpdf 徽标（内联）：![来自 https://codeberg.org/go-pdf/fpdf/src/branch/main/image](../image/fpdf.png)
 
 这是一个地鼠：
 

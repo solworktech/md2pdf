@@ -1,3 +1,4 @@
+---
 repos:
   - repo: https://github.com/jessp01/pre-commit-golang.git
     rev: v0.5.4
@@ -8,3 +9,9 @@ repos:
       - id: go-lint
       - id: go-critic
       - id: go-ineffassign
+      # - repo: https://github.com/crate-ci/typos
+      # rev: v1.32.0
+      # hooks:
+      # - id: typos
+      #    exclude_types: [yaml]
+      #    exclude: go.*

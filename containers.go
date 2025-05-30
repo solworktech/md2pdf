@@ -1,6 +1,6 @@
 /*
  * Markdown to PDF Converter
- * Available at http://github.com/mandolyte/mdtopdf
+ * Available at http://github.com/solworktech/md2pdf
  *
  * Copyright © Cecil New <cecil.new@gmail.com>, Jesse Portnoy <jesse@packman.io>.
  * Distributed under the MIT License.
@@ -14,7 +14,7 @@
  *
  * fpdf - a PDF document generator with high level support for
  *   text, drawing and images.
- *   Available at https://github.com/go-pdf/fpdf
+ *   Available at https://codeberg.org/go-pdf/fpdf
  */
 
 package mdtopdf
