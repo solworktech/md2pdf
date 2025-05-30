@@ -50,6 +50,7 @@ changelog:
       - '^test:'
 
 nfpms:
+  - package_name: mdtopdf
   - file_name_template: "{{ .ConventionalFileName }}"
     id: packages
     homepage: https://github.com/solworktech/mdtopdf
