@@ -1,6 +1,7 @@
 ---
 # This is an example .goreleaser.yml file with some sensible defaults.
 # Make sure to check the documentation at https://goreleaser.com
+project_name: mdtopdf
 before:
   hooks:
     - git submodule update --remote  --init
@@ -53,7 +54,7 @@ nfpms:
   - package_name: mdtopdf
   - file_name_template: "{{ .ConventionalFileName }}"
     id: packages
-    homepage: https://github.com/solworktech/mdtopdf
+    homepage: https://github.com/solworktech/md2pdf
     description: |-
       Markdown to PDF converter
       A CLI utility which, as the name implies, generates PDF from Markdown.
