@@ -35,7 +35,7 @@ This package depends on two other packages:
 ## Installation 
 
 You can obtain the pre-built `md2pdf` binary for your OS and arch
-[here](https://github.com/solworktech/mdtopdf/releases); 
+[here](https://github.com/solworktech/md2pdf/releases); 
 you can also install the `md2pdf` binary directly onto your `$GOBIN` dir with:
 
 ```sh
@@ -50,7 +50,7 @@ $ brew install md2pdf
 
 ## Syntax highlighting
 
-`mdtopdf` supports colourised output via the [gohighlight module](https://github.com/jessp01/gohighlight).
+`md2pdf` supports colourised output via the [gohighlight module](https://github.com/jessp01/gohighlight).
 
 For examples, see [testdata/syntax_highlighting.md](./testdata/syntax_highlighting.md) and 
 [testdata/syntax_highlighting.pdf](./testdata/syntax_highlighting.pdf)
