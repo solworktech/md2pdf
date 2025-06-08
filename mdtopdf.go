@@ -131,6 +131,87 @@ type PdfRenderer struct {
 	ColumnWidths              map[ast.Node][]float64
 }
 
+// TOCEntry represents a table of contents entry
+type TOCEntry struct {
+	Level int
+	Title string
+	ID    string
+}
+
+// TOCVisitor implements ast.NodeVisitor to collect headers
+type TOCVisitor struct {
+	entries []TOCEntry
+}
+
+// Visit implements the ast.NodeVisitor interface
+func (v *TOCVisitor) Visit(node ast.Node, entering bool) ast.WalkStatus {
+	if !entering {
+		return ast.GoToNext
+	}
+
+	// Check if the node is a heading
+	if heading, ok := node.(*ast.Heading); ok {
+		// Extract the text content from the heading
+		title := ExtractTextFromNode(heading)
+		if title != "" {
+			// Create a simple ID from the title (lowercase, replace spaces with hyphens)
+			id := strings.ToLower(strings.ReplaceAll(strings.TrimSpace(title), " ", "-"))
+			// Remove special characters for cleaner IDs
+			id = strings.ReplaceAll(id, ".", "")
+			id = strings.ReplaceAll(id, ",", "")
+			id = strings.ReplaceAll(id, "!", "")
+			id = strings.ReplaceAll(id, "?", "")
+
+			entry := TOCEntry{
+				Level: heading.Level,
+				Title: title,
+				ID:    id,
+			}
+			v.entries = append(v.entries, entry)
+		}
+	}
+
+	return ast.GoToNext
+}
+
+// ExtractTextFromNode recursively extracts text content from AST nodes
+func ExtractTextFromNode(node ast.Node) string {
+	var text strings.Builder
+
+	ast.WalkFunc(node, func(node ast.Node, entering bool) ast.WalkStatus {
+		if entering {
+			switch n := node.(type) {
+			case *ast.Text:
+				text.Write(n.Literal)
+			case *ast.Code:
+				text.Write(n.Literal)
+			}
+		}
+		return ast.GoToNext
+	})
+
+	return text.String()
+}
+
+// GetTOCEntries returns TOC entries
+func GetTOCEntries(content []byte) ([]TOCEntry, error) {
+
+	// Create parser with extensions
+	extensions := parser.CommonExtensions | parser.AutoHeadingIDs
+	p := parser.NewWithExtensions(extensions)
+
+	// Parse the markdown content
+	doc := markdown.Parse(content, p)
+
+	// Create visitor to collect TOC entries
+	visitor := &TOCVisitor{}
+
+	// Walk the AST and collect headers
+	ast.Walk(doc, visitor)
+
+	return visitor.entries, nil
+}
+
 // SetLightTheme sets theme to 'light'
 func (r *PdfRenderer) SetLightTheme() {
 	r.BackgroundColor = Colorlookup("white")

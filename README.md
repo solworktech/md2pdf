@@ -1,4 +1,3 @@
-
 [![CI][badge-build]][build]
 [![GoDoc][go-docs-badge]][go-docs]
 [![GoReportCard][go-report-card-badge]][go-report-card]
