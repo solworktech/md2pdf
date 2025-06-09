@@ -16,7 +16,7 @@ This package depends on two other packages:
 - [Syntax highlighting (for code blocks)](#syntax-highlighting)
 - [Dark and light themes](#custom-themes)
 - [Customised themes (by passing a JSON file to `md2pdf`)](#custom-themes)
-- [Auto Generation of Table of Contents]()
+- [Auto Generation of Table of Contents](#auto-generation-of-table-of-contents)
 - [Support of non-Latin charsets and multiple fonts](#using-non-ascii-glyphsfonts)
 - [Pagination control (using horizontal lines - especially useful for presentations)](#additional-options)
 - [Page Footer (consisting of author, title and page number)](#additional-options)
