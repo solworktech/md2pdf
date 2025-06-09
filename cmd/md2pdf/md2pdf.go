@@ -29,6 +29,7 @@ var fontName = flag.String("font-name", "", "Font name ID; e.g 'Helvetica-1251'"
 var themeArg = flag.String("theme", "light", "[light | dark | /path/to/custom/theme.json]")
 var hrAsNewPage = flag.Bool("new-page-on-hr", false, "Interpret HR as a new page; useful for presentations")
 var printFooter = flag.Bool("with-footer", false, "Print doc footer (<author>  <title>  <page number>)")
+var generateTOC = flag.Bool("generate-toc", false, "Auto Generate TOC")
 var pageSize = flag.String("page-size", "A4", "[A3 | A4 | A5]")
 var orientation = flag.String("orientation", "portrait", "[portrait | landscape]")
 var logFile = flag.String("log-file", "", "Path to log file")
@@ -174,6 +175,42 @@ func main() {
 	}
 
 	pf := mdtopdf.NewPdfRenderer(params)
+
+	if *generateTOC == true {
+		// we need to generate the TOC for `content`
+		headers, err := mdtopdf.GetTOCEntries(content)
+		if err != nil {
+			log.Fatal(err)
+		}
+		headerLinks := make(map[string]*int)
+		for _, header := range headers {
+			linkID := pf.Pdf.AddLink()
+			headerLinks[header.Title] = &linkID
+
+			// debug
+			// log.Printf("Header: '%s' (Level %d) -> Link ID: %d\n",
+			// header.Title, header.Level, linkID)
+		}
+
+		pf.SetTOCLinks(headerLinks)
+		pf.Pdf.SetFont("Arial", "B", 24)
+
+		// Add a table of contents with clickable links
+		pf.Pdf.Cell(40, 10, "Table of Contents")
+		pf.Pdf.Ln(30)
+
+		for _, header := range headers {
+			if linkPtr, exists := headerLinks[header.Title]; exists {
+				link := *linkPtr
+				pf.Pdf.SetFont("Arial", "", 12)
+				tr := pf.Pdf.UnicodeTranslatorFromDescriptor("")
+				pf.Pdf.WriteLinkID(8, fmt.Sprintf("%s %s", tr("•"), header.Title), link)
+				pf.Pdf.Ln(15)
+			}
+		}
+		pf.Pdf.AddPage()
+	}
+
 	if inputBaseURL != "" {
 		pf.InputBaseURL = inputBaseURL
 	}

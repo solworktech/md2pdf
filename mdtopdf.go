@@ -129,6 +129,8 @@ type PdfRenderer struct {
 	documentMatter            ast.DocumentMatters // keep track of front/main/back matter.
 	Extensions                parser.Extensions
 	ColumnWidths              map[ast.Node][]float64
+
+	tocLinks map[string]*int
 }
 
 // TOCEntry represents a table of contents entry
@@ -140,7 +142,7 @@ type TOCEntry struct {
 
 // TOCVisitor implements ast.NodeVisitor to collect headers
 type TOCVisitor struct {
-	entries []TOCEntry
+	Entries []TOCEntry
 }
 
 // Visit implements the ast.NodeVisitor interface
@@ -167,7 +169,7 @@ func (v *TOCVisitor) Visit(node ast.Node, entering bool) ast.WalkStatus {
 				Title: title,
 				ID:    id,
 			}
-			v.entries = append(v.entries, entry)
+			v.Entries = append(v.Entries, entry)
 		}
 	}
 
@@ -209,7 +211,13 @@ func GetTOCEntries(content []byte) ([]TOCEntry, error) {
 	// Walk the AST and collect headers
 	ast.Walk(doc, visitor)
 
-	return visitor.entries, nil
+	return visitor.Entries, nil
+}
+
+// SetTOCLinks these will be used in `nodeProcessing.go:processText()` if the header is encoutered
+// as we need to call `r.Pdf.SetLink()` if that's the case
+func (r *PdfRenderer) SetTOCLinks(tocHeaders map[string]*int) {
+	r.tocLinks = tocHeaders
 }
 
 // SetLightTheme sets theme to 'light'

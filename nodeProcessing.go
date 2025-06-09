@@ -59,6 +59,16 @@ func (r *PdfRenderer) processText(node *ast.Text) {
 	case *ast.Link:
 		r.writeLink(currentStyle, s, r.cs.peek().destination)
 	case *ast.Heading:
+		if len(r.tocLinks) > 0 {
+			if linkPtr, exists := r.tocLinks[s]; exists {
+				// Dereference the pointer to get the actual link ID
+				link := *linkPtr
+				r.Pdf.SetLink(link, -1, -1)
+				r.tracer("Text Heading", fmt.Sprintf("Set link for header '%s' with link ID: %d\n", s, link))
+			} else {
+				r.tracer("Text Heading", fmt.Sprintf("Header '%s' not found in links map\n", s))
+			}
+		}
 		r.write(currentStyle, s)
 	case *ast.BlockQuote:
 		if r.NeedBlockquoteStyleUpdate {
