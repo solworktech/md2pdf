@@ -64,10 +64,10 @@ However, if you wish to customise the font faces, sizes and colours, you can use
 
 ## Auto Generation of Table of Contents
 
-`md2pdf` can automatically generate a TOC (where each item corresponds to a header in the doc) and include it in the first page.
-These can then be clicked to navigate to the relevant section.
+`md2pdf` can automatically generate a TOC where each item corresponds to a header in the doc and include it in the first page.
+TOC items can then be clicked to navigate to the relevant section (similar to HTML `<a>` anchors).
 
-To make use of this feature, simple pass `--generate-toc` as an argument.
+To make use of this feature, simply pass `--generate-toc` as an argument.
 
 ## Quick start
 
