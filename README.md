@@ -67,7 +67,7 @@ However, if you wish to customise the font faces, sizes and colours, you can use
 `md2pdf` can automatically generate a TOC (where each item corresponds to a header in the doc) and include it in the first page.
 These can then be clicked to navigate to the relevant section.
 
-To make use of this feature, simple pass `--generate-toc` as argument.
+To make use of this feature, simple pass `--generate-toc` as an argument.
 
 ## Quick start
 
