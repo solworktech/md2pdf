@@ -29,7 +29,7 @@ var fontName = flag.String("font-name", "", "Font name ID; e.g 'Helvetica-1251'"
 var themeArg = flag.String("theme", "light", "[light | dark | /path/to/custom/theme.json]")
 var hrAsNewPage = flag.Bool("new-page-on-hr", false, "Interpret HR as a new page; useful for presentations")
 var printFooter = flag.Bool("with-footer", false, "Print doc footer (<author>  <title>  <page number>)")
-var generateTOC = flag.Bool("generate-toc", false, "Auto Generate TOC")
+var generateTOC = flag.Bool("generate-toc", false, "Auto Generate Table of Contents (TOC)")
 var pageSize = flag.String("page-size", "A4", "[A3 | A4 | A5]")
 var orientation = flag.String("orientation", "portrait", "[portrait | landscape]")
 var logFile = flag.String("log-file", "", "Path to log file")
@@ -203,8 +203,11 @@ func main() {
 			if linkPtr, exists := headerLinks[header.Title]; exists {
 				link := *linkPtr
 				pf.Pdf.SetFont("Arial", "", 12)
+				pf.Pdf.SetTextColor(100, 149, 237)
 				tr := pf.Pdf.UnicodeTranslatorFromDescriptor("")
-				pf.Pdf.WriteLinkID(8, fmt.Sprintf("%s %s", tr("•"), header.Title), link)
+				bulletChar := tr("•")
+				indent := strings.Repeat("  ", header.Level-1)
+				pf.Pdf.WriteLinkID(8, fmt.Sprintf("%s %s %s", indent, bulletChar, header.Title), link)
 				pf.Pdf.Ln(15)
 			}
 		}

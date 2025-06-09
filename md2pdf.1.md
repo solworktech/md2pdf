@@ -38,6 +38,13 @@ For examples, see `testdata/Markdown Documentation - Syntax.text` and `testdata/
 However, if you wish to customise the font faces, sizes and colours, you can use the JSONs in
 [custom_themes](./custom_themes) as a starting point. Edit to your liking and pass `--theme /path/to/json` to `md2pdf`
 
+## Auto Generation of Table of Contents
+
+`md2pdf` can automatically generate a TOC (where each item corresponds to a header in the doc) and include it in the first page.
+These can then be clicked to navigate to the relevant section.
+
+To make use of this feature, simple pass `--generate-toc` as argument.
+
 ## Synopsis
 
 ```sh
@@ -47,6 +54,8 @@ However, if you wish to customise the font faces, sizes and colours, you can use
     	path to font file to use
   -font-name string
     	Font name ID; e.g 'Helvetica-1251'
+  -generate-toc
+    	Auto Generate Table of Contents (TOC)
   -help
     	Show usage message
   -i string

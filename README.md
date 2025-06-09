@@ -16,6 +16,7 @@ This package depends on two other packages:
 - [Syntax highlighting (for code blocks)](#syntax-highlighting)
 - [Dark and light themes](#custom-themes)
 - [Customised themes (by passing a JSON file to `md2pdf`)](#custom-themes)
+- [Auto Generation of Table of Contents]()
 - [Support of non-Latin charsets and multiple fonts](#using-non-ascii-glyphsfonts)
 - [Pagination control (using horizontal lines - especially useful for presentations)](#additional-options)
 - [Page Footer (consisting of author, title and page number)](#additional-options)
@@ -61,6 +62,13 @@ For examples, see [testdata/syntax_highlighting.md](./testdata/syntax_highlighti
 However, if you wish to customise the font faces, sizes and colours, you can use the JSONs in
 [custom_themes](./custom_themes) as a starting point. Edit to your liking and pass `--theme /path/to/json` to `md2pdf`
 
+## Auto Generation of Table of Contents
+
+`md2pdf` can automatically generate a TOC (where each item corresponds to a header in the doc) and include it in the first page.
+These can then be clicked to navigate to the relevant section.
+
+To make use of this feature, simple pass `--generate-toc` as argument.
+
 ## Quick start
 
 ```
@@ -104,6 +112,8 @@ annotation name must match the syntax base filename.*
     	path to font file to use
   -font-name string
     	Font name ID; e.g 'Helvetica-1251'
+  -generate-toc
+    	Auto Generate Table of Contents (TOC)
   -help
     	Show usage message
   -i string
