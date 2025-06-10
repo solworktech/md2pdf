@@ -38,6 +38,7 @@ import (
 	"github.com/gabriel-vasile/mimetype"
 	"github.com/gomarkdown/markdown/ast"
 	highlight "github.com/jessp01/gohighlight"
+	"github.com/mitchellh/go-wordwrap"
 )
 
 func (r *PdfRenderer) processText(node *ast.Text) {
@@ -119,9 +120,10 @@ func (r *PdfRenderer) processCodeblock(node ast.CodeBlock) {
 	}
 	syntaxDef, _ := highlight.ParseDef(syntaxFile)
 	h := highlight.NewHighlighter(syntaxDef)
-	matches := h.HighlightString(string(node.Literal))
+	linesWrapped := wordwrap.WrapString(string(node.Literal), 90)
+	matches := h.HighlightString(linesWrapped)
 	r.cr()
-	lines := strings.Split(string(node.Literal), "\n")
+	lines := strings.Split(linesWrapped, "\n")
 	for lineN, l := range lines {
 		colN := 0
 		for _, c := range l {

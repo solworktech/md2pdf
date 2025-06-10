@@ -8,6 +8,7 @@ require (
 	github.com/gabriel-vasile/mimetype v1.4.8
 	github.com/gomarkdown/markdown v0.0.0-20250311123330-531bef5e742b
 	github.com/jessp01/gohighlight v0.21.2
+	github.com/mitchellh/go-wordwrap v1.0.1
 	golang.org/x/exp v0.0.0-20240707233637-46b078467d37
 )
 

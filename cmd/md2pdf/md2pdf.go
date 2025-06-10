@@ -177,7 +177,6 @@ func main() {
 	pf := mdtopdf.NewPdfRenderer(params)
 
 	if *generateTOC == true {
-		// we need to generate the TOC for `content`
 		headers, err := mdtopdf.GetTOCEntries(content)
 		if err != nil {
 			log.Fatal(err)
