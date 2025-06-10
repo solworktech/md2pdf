@@ -39,7 +39,7 @@ You can obtain the pre-built `md2pdf` binary for your OS and arch
 you can also install the `md2pdf` binary directly onto your `$GOBIN` dir with:
 
 ```sh
-$ go install github.com/mandolyte/mdtopdf/v2/cmd/md2pdf@latest
+$ go install github.com/solworktech/md2pdf/v2/cmd/md2pdf@latest
 ```
 
 `md2pdf` is also available via [Homebrew](https://formulae.brew.sh/formula/md2pdf):
@@ -225,10 +225,10 @@ go-critic................................................................Passed
 - Submit a pull request and include a succinct description of the feature or issue it addresses 
 
 [license]: ./LICENSE
-[badge-license]: https://img.shields.io/github/license/solworktech/mdtopdf.svg
-[go-docs-badge]: https://godoc.org/github.com/mandolyte/mdtopdf?status.svg
-[go-docs]: https://godoc.org/github.com/mandolyte/mdtopdf/v2
-[badge-build]: https://github.com/solworktech/mdtopdf/actions/workflows/go.yml/badge.svg
-[build]: https://github.com/solworktech/mdtopdf/actions/workflows/go.yml
-[go-report-card-badge]: https://goreportcard.com/badge/github.com/mandolyte/mdtopdf/v2
-[go-report-card]: https://goreportcard.com/report/github.com/mandolyte/mdtopdf/v2
+[badge-license]: https://img.shields.io/github/license/solworktech/md2pdf.svg
+[go-docs-badge]: https://godoc.org/github.com/solworktech/md2pdf?status.svg
+[go-docs]: https://godoc.org/github.com/solworktech/md2pdf/v2
+[badge-build]: https://github.com/solworktech/md2pdf/actions/workflows/go.yml/badge.svg
+[build]: https://github.com/solworktech/md2pdf/actions/workflows/go.yml
+[go-report-card-badge]: https://goreportcard.com/badge/github.com/solworktech/md2pdf/v2
+[go-report-card]: https://goreportcard.com/report/github.com/solworktech/md2pdf/v2
