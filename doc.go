@@ -23,7 +23,7 @@ and data provided in each while the AST is presented.
 
 To install the package:
 
-	go get github.com/mandolyte/mdtopdf
+	go get github.com/solworktech/md2pdf/v2
 
 # Quick start
 
