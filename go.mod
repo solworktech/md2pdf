@@ -1,4 +1,4 @@
-module github.com/mandolyte/mdtopdf/v2
+module github.com/solworktech/md2pdf/v2
 
 go 1.23.0
 
