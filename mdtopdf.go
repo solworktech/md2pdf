@@ -406,6 +406,7 @@ func NewPdfRenderer(params PdfRendererParams) *PdfRenderer {
 		textStyle: r.Normal, leftMargin: r.mleft}
 	r.cs.push(initcurrent)
 
+	r.MermaidEnabled = true
 	r.MermaidScale = 2.0
 
 	for _, o := range params.Opts {
