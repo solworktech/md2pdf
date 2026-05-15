@@ -6,7 +6,7 @@ require (
 	codeberg.org/go-pdf/fpdf v0.11.1
 	github.com/canhlinh/svg2png v0.0.0-20201124065332-6ba87c82371f
 	github.com/gabriel-vasile/mimetype v1.4.8
-	github.com/gomarkdown/markdown v0.0.0-20250311123330-531bef5e742b
+	github.com/gomarkdown/markdown v0.0.0-20260417124207-7d523f7318df
 	github.com/jessp01/gohighlight v0.21.2
 	github.com/mitchellh/go-wordwrap v1.0.1
 	golang.org/x/exp v0.0.0-20240707233637-46b078467d37
