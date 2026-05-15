@@ -94,6 +94,50 @@ func (r *PdfRenderer) outputUnhighlightedCodeBlock(codeBlock string) {
 	r.multiCell(r.Backtick, codeBlock)
 }
 
+func (r *PdfRenderer) processMermaidBlock(content string) {
+	r.cr()
+	r.tracer("Mermaid", content)
+
+	if err := r.initMermaidEngine(); err != nil {
+		log.Println("mermaid engine init error:", err)
+		r.outputUnhighlightedCodeBlock(content)
+		return
+	}
+
+	pngBytes, _, err := r.MermaidRenderEngine.RenderAsScaledPng(content, r.MermaidScale)
+	if err != nil {
+		log.Println("mermaid render error:", err)
+		r.outputUnhighlightedCodeBlock(content)
+		return
+	}
+
+	tempDir := os.TempDir() + "/" + filepath.Base(os.Args[0])
+	os.MkdirAll(tempDir, 0755)
+
+	tf, err := os.CreateTemp(tempDir, "mermaid-*.png")
+	if err != nil {
+		log.Println("mermaid temp file error:", err)
+		r.outputUnhighlightedCodeBlock(content)
+		return
+	}
+	tmpName := tf.Name()
+
+	if _, err := tf.Write(pngBytes); err != nil {
+		tf.Close()
+		os.Remove(tmpName)
+		log.Println("mermaid write error:", err)
+		r.outputUnhighlightedCodeBlock(content)
+		return
+	}
+	tf.Close()
+
+	r.Pdf.ImageOptions(tmpName,
+		-1, 0, 0, 0, true,
+		fpdf.ImageOptions{ImageType: "PNG", ReadDpi: true}, 0, "")
+	os.Remove(tmpName)
+	r.cr()
+}
+
 func (r *PdfRenderer) processCodeblock(node ast.CodeBlock) {
 	r.tracer("Codeblock", fmt.Sprintf("%v", ast.ToString(node.AsLeaf())))
 
@@ -103,6 +147,11 @@ func (r *PdfRenderer) processCodeblock(node ast.CodeBlock) {
 	var isValidSyntaxHighlightBaseDir bool = false
 	if stat, err := os.Stat(r.SyntaxHighlightBaseDir); err == nil && stat.IsDir() {
 		isValidSyntaxHighlightBaseDir = true
+	}
+
+	if r.MermaidEnabled && string(node.Info) == "mermaid" {
+		r.processMermaidBlock(string(node.Literal))
+		return
 	}
 
 	if len(node.Info) < 1 || !isValidSyntaxHighlightBaseDir {

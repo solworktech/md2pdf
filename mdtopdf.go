@@ -22,6 +22,7 @@ package mdtopdf
 
 import (
 	"bufio"
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -31,6 +32,7 @@ import (
 	"strings"
 
 	"codeberg.org/go-pdf/fpdf"
+	"github.com/dreampuf/mermaid.go"
 	"github.com/gomarkdown/markdown"
 	"github.com/gomarkdown/markdown/ast"
 	"github.com/gomarkdown/markdown/parser"
@@ -131,6 +133,10 @@ type PdfRenderer struct {
 	ColumnWidths              map[ast.Node][]float64
 
 	tocLinks map[string]*int
+
+	MermaidRenderEngine *mermaid_go.RenderEngine
+	MermaidEnabled      bool
+	MermaidScale        float64
 }
 
 // TOCEntry represents a table of contents entry
@@ -400,6 +406,8 @@ func NewPdfRenderer(params PdfRendererParams) *PdfRenderer {
 		textStyle: r.Normal, leftMargin: r.mleft}
 	r.cs.push(initcurrent)
 
+	r.MermaidScale = 2.0
+
 	for _, o := range params.Opts {
 		o(r)
 	}
@@ -456,6 +464,8 @@ func (r *PdfRenderer) Process(content []byte) error {
 
 // Run takes the markdown content, parses it but don't generate the PDF. you can access the PDF with youRenderer.Pdf
 func (r *PdfRenderer) Run(content []byte) error {
+	defer r.closeMermaidEngine()
+
 	// Preprocess content by changing all CRLF to LF
 	s := content
 	s = markdown.NormalizeNewlines(s)
@@ -568,6 +578,26 @@ func (r *PdfRenderer) multiCell(s Styler, t string) {
 
 func (r *PdfRenderer) writeLink(s Styler, display, url string) {
 	r.Pdf.WriteLinkString(s.Size+s.Spacing, display, url)
+}
+
+func (r *PdfRenderer) initMermaidEngine() error {
+	if r.MermaidRenderEngine != nil {
+		return nil
+	}
+	ctx := context.Background()
+	engine, err := mermaid_go.NewRenderEngine(ctx, nil)
+	if err != nil {
+		return fmt.Errorf("failed to initialize mermaid render engine: %w", err)
+	}
+	r.MermaidRenderEngine = engine
+	return nil
+}
+
+func (r *PdfRenderer) closeMermaidEngine() {
+	if r.MermaidRenderEngine != nil {
+		r.MermaidRenderEngine.Cancel()
+		r.MermaidRenderEngine = nil
+	}
 }
 
 // RenderNode is a default renderer of a single node of a syntax tree. For
@@ -702,5 +732,19 @@ func IsHorizontalRuleNewPage(value bool) RenderOption {
 func SetSyntaxHighlightBaseDir(path string) RenderOption {
 	return func(r *PdfRenderer) {
 		r.SyntaxHighlightBaseDir = path
+	}
+}
+
+// SetMermaidEnabled enables mermaid diagram rendering via headless Chrome
+func SetMermaidEnabled(enabled bool) RenderOption {
+	return func(r *PdfRenderer) {
+		r.MermaidEnabled = enabled
+	}
+}
+
+// SetMermaidScale sets the PNG scaling factor for mermaid diagrams (default 2.0)
+func SetMermaidScale(scale float64) RenderOption {
+	return func(r *PdfRenderer) {
+		r.MermaidScale = scale
 	}
 }

@@ -168,3 +168,38 @@ func TestLinksShortcut(t *testing.T) {
 func TestTidyness(t *testing.T) {
 	testit("Tidyness.text", false, t)
 }
+
+func TestMermaid(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping mermaid test in short mode (requires Chrome)")
+	}
+	inputd := "./testdata/"
+	input := path.Join(inputd, "mermaid.md")
+
+	tracerfile := path.Join(inputd, "mermaid.log")
+	pdffile := path.Join(inputd, "mermaid.pdf")
+
+	content, err := os.ReadFile(input)
+	if err != nil {
+		t.Fatalf("%v:%v", input, err)
+	}
+
+	opts := []RenderOption{SetMermaidEnabled(true)}
+	params := PdfRendererParams{
+		Orientation:     "",
+		Papersz:         "",
+		PdfFile:         pdffile,
+		TracerFile:      tracerfile,
+		Opts:            opts,
+		Theme:           LIGHT,
+		CustomThemeFile: "",
+		FontFile:        "",
+		FontName:        "",
+	}
+	r := NewPdfRenderer(params)
+	r.Extensions = parser.NoIntraEmphasis | parser.Tables | parser.FencedCode | parser.Autolink | parser.Strikethrough | parser.SpaceHeadings | parser.HeadingIDs | parser.BackslashLineBreak | parser.DefinitionLists
+	err = r.Process(content)
+	if err != nil {
+		t.Error(err)
+	}
+}

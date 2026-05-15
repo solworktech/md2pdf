@@ -33,6 +33,7 @@ var generateTOC = flag.Bool("generate-toc", false, "Auto Generate Table of Conte
 var pageSize = flag.String("page-size", "A4", "[A3 | A4 | A5]")
 var orientation = flag.String("orientation", "portrait", "[portrait | landscape]")
 var logFile = flag.String("log-file", "", "Path to log file")
+var mermaid = flag.Bool("mermaid", false, "Enable mermaid diagram rendering (requires Chrome/Chromium)")
 var help = flag.Bool("help", false, "Show usage message")
 var ver = flag.Bool("version", false, "Print version and build info")
 var version = "dev"
@@ -91,6 +92,10 @@ func main() {
 
 	if *unicodeSupport != "" {
 		opts = append(opts, mdtopdf.WithUnicodeTranslator(*unicodeSupport))
+	}
+
+	if *mermaid {
+		opts = append(opts, mdtopdf.SetMermaidEnabled(true))
 	}
 
 	if *pathToSyntaxFiles != "" {
