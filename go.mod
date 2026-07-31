@@ -1,6 +1,6 @@
 module github.com/solworktech/md2pdf/v2
 
-go 1.23.0
+go 1.25.0
 
 require (
 	codeberg.org/go-pdf/fpdf v0.11.1
@@ -16,7 +16,7 @@ require (
 	github.com/mcuadros/go-version v0.0.0-20190830083331-035f6764e8d2 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/stretchr/testify v1.8.4 // indirect
-	golang.org/x/net v0.38.0 // indirect
-	golang.org/x/sys v0.31.0 // indirect
+	golang.org/x/net v0.55.0 // indirect
+	golang.org/x/sys v0.45.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
