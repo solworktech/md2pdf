@@ -259,12 +259,12 @@ func (r *PdfRenderer) processItem(node ast.ListItem, entering bool) {
 				bulletChar = tr("▪")
 				r.Pdf.SetFont("", "", 25)
 			}
-			r.Pdf.CellFormat(r.BulletIndentation * r.em, r.Normal.Size+r.Normal.Spacing,
+			r.Pdf.CellFormat(r.BulletIndentation*r.em, r.Normal.Size+r.Normal.Spacing,
 				bulletChar,
 				"", 0, "RB", false, 0, "")
 			r.Pdf.SetFont("", "", currFontSize)
 		} else if r.cs.peek().listkind == ordered {
-			r.Pdf.CellFormat(r.BulletIndentation * r.em, r.Normal.Size+r.Normal.Spacing,
+			r.Pdf.CellFormat(r.BulletIndentation*r.em, r.Normal.Size+r.Normal.Spacing,
 				fmt.Sprintf("%v.", r.cs.peek().itemNumber),
 				"", 0, "RB", false, 0, "")
 		}
