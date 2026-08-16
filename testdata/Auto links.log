@@ -35,18 +35,18 @@
     Paragraph
       Text 'It should.'
 
-[... List Left Margin] set to 58.338
+[... List Left Margin] set to 53.34
 -[Unordered Item (entering) #1] Container
   Paragraph
     Text 'In a list?'
 
 -[cr()] LH=14
 --[Paragraph (entering)] 
---[... Margins (left, top, right, bottom:] 98.322 28.35 28.35 56.7
+--[... Margins (left, top, right, bottom:] 54.339600000000004 28.35 28.35 56.7
 --[First Para within a list] breaking
 --[Text] In a list?
 --[Paragraph (leaving)] 
---[... Margins (left, top, right, bottom:] 98.322 28.35 28.35 56.7
+--[... Margins (left, top, right, bottom:] 54.339600000000004 28.35 28.35 56.7
 --[Unordered Item (leaving)] Container
   Paragraph
     Text 'In a list?'
@@ -60,7 +60,7 @@
 
 -[cr()] LH=14
 --[Paragraph (entering)] 
---[... Margins (left, top, right, bottom:] 98.322 28.35 28.35 56.7
+--[... Margins (left, top, right, bottom:] 54.339600000000004 28.35 28.35 56.7
 --[First Para within a list] breaking
 --[Text] 
 ---[Link (entering)] Destination[http://example.com/] Title[]
@@ -68,7 +68,7 @@
 ---[Link (leaving)] 
 --[Text] 
 --[Paragraph (leaving)] 
---[... Margins (left, top, right, bottom:] 98.322 28.35 28.35 56.7
+--[... Margins (left, top, right, bottom:] 54.339600000000004 28.35 28.35 56.7
 --[Unordered Item (leaving)] Container
   Paragraph
     Text
@@ -82,11 +82,11 @@
 
 -[cr()] LH=14
 --[Paragraph (entering)] 
---[... Margins (left, top, right, bottom:] 98.322 28.35 28.35 56.7
+--[... Margins (left, top, right, bottom:] 54.339600000000004 28.35 28.35 56.7
 --[First Para within a list] breaking
 --[Text] It should.
 --[Paragraph (leaving)] 
---[... Margins (left, top, right, bottom:] 98.322 28.35 28.35 56.7
+--[... Margins (left, top, right, bottom:] 54.339600000000004 28.35 28.35 56.7
 --[Unordered Item (leaving)] Container
   Paragraph
     Text 'It should.'
@@ -109,14 +109,14 @@
 [cr()] LH=14
 [BlockQuote (entering)] 
 -[Paragraph (entering)] 
--[... Margins (left, top, right, bottom:] 58.338 28.35 28.35 56.7
+-[... Margins (left, top, right, bottom:] 53.34 28.35 28.35 56.7
 -[cr()] LH=14
 -[Text] Blockquoted: 
 --[Link (entering)] Destination[http://example.com/] Title[]
 --[Text] http://example.com/
 --[Link (leaving)] 
 -[Paragraph (leaving)] 
--[... Margins (left, top, right, bottom:] 58.338 28.35 28.35 56.7
+-[... Margins (left, top, right, bottom:] 53.34 28.35 28.35 56.7
 -[cr()] LH=14
 -[BlockQuote (leaving)] 
 [cr()] LH=14

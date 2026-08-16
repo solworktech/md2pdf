@@ -130,6 +130,8 @@ type PdfRenderer struct {
 	Extensions                parser.Extensions
 	ColumnWidths              map[ast.Node][]float64
 
+	BulletIndentation float64
+
 	tocLinks map[string]*int
 }
 
@@ -372,6 +374,7 @@ func NewPdfRenderer(params PdfRendererParams) *PdfRenderer {
 	r.Theme = params.Theme
 
 	r.Pdf = fpdf.New(r.orientation, r.units, r.papersize, r.fontdir)
+	r.BulletIndentation = 0.1
 
 	r.Pdf.SetHeaderFunc(func() {
 		r.SetPageBackground("", r.BackgroundColor)
@@ -392,7 +395,7 @@ func NewPdfRenderer(params PdfRendererParams) *PdfRenderer {
 	r.setStyler(r.Normal)
 	r.mleft, r.mtop, r.mright, r.mbottom = r.Pdf.GetMargins()
 	r.em = r.Pdf.GetStringWidth("m")
-	r.IndentValue = 3 * r.em
+	r.IndentValue = 2.5 * r.em
 
 	r.cs = states{stack: make([]*containerState, 0)}
 	initcurrent := &containerState{

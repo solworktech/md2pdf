@@ -259,19 +259,19 @@ func (r *PdfRenderer) processItem(node ast.ListItem, entering bool) {
 				bulletChar = tr("▪")
 				r.Pdf.SetFont("", "", 25)
 			}
-			r.Pdf.CellFormat(4*r.em, r.Normal.Size+r.Normal.Spacing,
+			r.Pdf.CellFormat(r.BulletIndentation * r.em, r.Normal.Size+r.Normal.Spacing,
 				bulletChar,
 				"", 0, "RB", false, 0, "")
 			r.Pdf.SetFont("", "", currFontSize)
 		} else if r.cs.peek().listkind == ordered {
-			r.Pdf.CellFormat(4*r.em, r.Normal.Size+r.Normal.Spacing,
+			r.Pdf.CellFormat(r.BulletIndentation * r.em, r.Normal.Size+r.Normal.Spacing,
 				fmt.Sprintf("%v.", r.cs.peek().itemNumber),
 				"", 0, "RB", false, 0, "")
 		}
 		// with the bullet done, now set the left margin for the text
-		r.Pdf.SetLeftMargin(r.cs.peek().leftMargin + (4 * r.em))
+		r.Pdf.SetLeftMargin(r.cs.peek().leftMargin + (r.BulletIndentation * r.em))
 		// set the cursor to this point
-		r.Pdf.SetX(r.cs.peek().leftMargin + (4 * r.em))
+		r.Pdf.SetX(r.cs.peek().leftMargin + (r.BulletIndentation * r.em))
 	} else {
 		r.tracer(fmt.Sprintf("%v Item (leaving)",
 			r.cs.peek().listkind),
