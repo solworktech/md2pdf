@@ -311,10 +311,32 @@ func (r *PdfRenderer) processLink(node ast.Link, entering bool) {
 		if r.InputBaseURL != "" && !strings.HasPrefix(destination, "http") {
 			destination = r.InputBaseURL + "/" + strings.Replace(destination, "./", "", 1)
 		}
+
+		// Get the current style from parent (might be heading)
+		parentStyle := r.cs.peek().textStyle
+
+		// Determine if parent is a heading by checking font size
+		linkStyle := r.Link
+		isInsideHeading := parentStyle.Size > r.Normal.Size
+
+		if isInsideHeading {
+			// Preserve heading size/font, but use link color
+			linkStyle = Styler{
+				Font:      parentStyle.Font,
+				Style:     parentStyle.Style,
+				Size:      parentStyle.Size,
+				Spacing:   parentStyle.Spacing,
+				TextColor: r.Link.TextColor, // Link blue color
+				FillColor: parentStyle.FillColor,
+			}
+		}
+
 		x := &containerState{
-			textStyle: r.Link, listkind: notlist,
+			textStyle:   linkStyle,
+			listkind:    notlist,
 			leftMargin:  r.cs.peek().leftMargin,
-			destination: destination}
+			destination: destination,
+		}
 		r.cs.push(x)
 		r.tracer("Link (entering)",
 			fmt.Sprintf("Destination[%v] Title[%v]",
