@@ -2,6 +2,7 @@
 [![GoDoc][go-docs-badge]][go-docs]
 [![GoReportCard][go-report-card-badge]][go-report-card]
 [![License][badge-license]][license]
+[![Solwork][solwork-badge]][solwork]
 
 ## Markdown to PDF
 
@@ -232,3 +233,5 @@ go-critic................................................................Passed
 [build]: https://github.com/solworktech/md2pdf/actions/workflows/go.yml
 [go-report-card-badge]: https://goreportcard.com/badge/github.com/solworktech/md2pdf/v2
 [go-report-card]: https://goreportcard.com/report/github.com/solworktech/md2pdf/v2
+[solwork-badge]: https://solwork.io/assets/img/solwork-badge.png 
+[solwork]: https://solwork.io
