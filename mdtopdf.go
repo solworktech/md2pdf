@@ -126,9 +126,9 @@ type PdfRenderer struct {
 	InputBaseURL              string
 	Theme                     Theme
 	BackgroundColor           Color
-	documentMatter            ast.DocumentMatters // keep track of front/main/back matter.
-	Extensions                parser.Extensions
-	ColumnWidths              map[ast.Node][]float64
+	// documentMatter            ast.DocumentMatters // keep track of front/main/back matter.
+	Extensions   parser.Extensions
+	ColumnWidths map[ast.Node][]float64
 
 	BulletIndentation float64
 
@@ -439,9 +439,17 @@ func (r *PdfRenderer) Process(content []byte) error {
 		if err != nil {
 			return fmt.Errorf("os.Create() on tracefile error:%v", err)
 		}
-		defer f.Close()
+		defer func() {
+			if err := f.Close(); err != nil {
+				log.Printf("error closing tracer file: %v", err)
+			}
+		}()
 		r.w = bufio.NewWriter(f)
-		defer r.w.Flush()
+		defer func() {
+			if err := r.w.Flush(); err != nil {
+				log.Printf("error flushing writer: %v", err)
+			}
+		}()
 	}
 
 	err = r.Run(content)
@@ -667,7 +675,9 @@ func (r *PdfRenderer) cr() {
 func (r *PdfRenderer) tracer(source, msg string) {
 	if r.tracerFile != "" {
 		indent := strings.Repeat("-", len(r.cs.stack)-1)
-		r.w.WriteString(fmt.Sprintf("%v[%v] %v\n", indent, source, msg))
+		if _, err := fmt.Fprintf(r.w, "%v[%v] %v\n", indent, source, msg); err != nil {
+			log.Printf("error writing to tracer: %v", err)
+		}
 	}
 }
 

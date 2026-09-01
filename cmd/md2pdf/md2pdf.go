@@ -38,7 +38,7 @@ var ver = flag.Bool("version", false, "Print version and build info")
 var version = "dev"
 var commit = "none"
 var date = "unknown"
-var _, fileName, fileLine, ok = runtime.Caller(0)
+var _, fileName, _, _ = runtime.Caller(0)
 
 var opts []mdtopdf.RenderOption
 
@@ -47,7 +47,11 @@ func processRemoteInputFile(url string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer func() {
+		if err := resp.Body.Close(); err != nil {
+			log.Printf("error closing response body: %v", err)
+		}
+	}()
 	if resp.StatusCode != 200 {
 		return nil, errors.New("Received non 200 response code: " + fmt.Sprintf("HTTP %d", resp.StatusCode))
 	}
@@ -85,7 +89,7 @@ func main() {
 		usage("Output PDF filename is required")
 	}
 
-	if *hrAsNewPage == true {
+	if *hrAsNewPage {
 		opts = append(opts, mdtopdf.IsHorizontalRuleNewPage(true))
 	}
 
@@ -176,7 +180,7 @@ func main() {
 
 	pf := mdtopdf.NewPdfRenderer(params)
 
-	if *generateTOC == true {
+	if *generateTOC {
 		headers, err := mdtopdf.GetTOCEntries(content)
 		if err != nil {
 			log.Fatal(err)
@@ -246,13 +250,13 @@ func main() {
 			w, h, _ := pf.Pdf.PageSize(pf.Pdf.PageNo())
 			// fmt.Printf("Width: %f, height: %f, unit: %s\n", w, h, u)
 			pf.Pdf.SetX(4)
-			pf.Pdf.CellFormat(0, 10, fmt.Sprintf("%s", *author), "", 0, "", true, 0, "")
+			pf.Pdf.CellFormat(0, 10, *author, "", 0, "", true, 0, "")
 			middle := w / 2
 			if *orientation == "landscape" {
 				middle = h / 2
 			}
 			pf.Pdf.SetX(middle - float64(len(*title)))
-			pf.Pdf.CellFormat(0, 10, fmt.Sprintf("%s", *title), "", 0, "", true, 0, "")
+			pf.Pdf.CellFormat(0, 10, *title, "", 0, "", true, 0, "")
 			pf.Pdf.SetX(-40)
 			pf.Pdf.CellFormat(0, 10, fmt.Sprintf("Page %d", pf.Pdf.PageNo()), "", 0, "", true, 0, "")
 		})

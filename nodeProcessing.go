@@ -82,11 +82,11 @@ func (r *PdfRenderer) processText(node *ast.Text) {
 }
 
 // This is a stub implementation. For now, the MathAjax extension is disabled.
-func (r *PdfRenderer) processMath(node *ast.Math) {
+/*func (r *PdfRenderer) processMath(node *ast.Math) {
 	currentStyle := r.cs.peek().textStyle
 	s := string(node.Literal)
 	r.write(currentStyle, s)
-}
+}*/
 
 func (r *PdfRenderer) outputUnhighlightedCodeBlock(codeBlock string) {
 	r.cr() // start on next line!
@@ -100,7 +100,7 @@ func (r *PdfRenderer) processCodeblock(node ast.CodeBlock) {
 	currentStyle := r.cs.peek().textStyle
 	r.setStyler(currentStyle)
 
-	var isValidSyntaxHighlightBaseDir bool = false
+	isValidSyntaxHighlightBaseDir := false
 	if stat, err := os.Stat(r.SyntaxHighlightBaseDir); err == nil && stat.IsDir() {
 		isValidSyntaxHighlightBaseDir = true
 	}
@@ -367,7 +367,11 @@ func downloadFile(url, fileName string) error {
 	if err != nil {
 		return err
 	}
-	defer response.Body.Close()
+	defer func() {
+		if err := response.Body.Close(); err != nil {
+			log.Printf("error closing response body: %v", err)
+		}
+	}()
 
 	if response.StatusCode != 200 {
 		return errors.New("Received non 200 response code: " + fmt.Sprintf("HTTP %d", response.StatusCode))
@@ -377,7 +381,11 @@ func downloadFile(url, fileName string) error {
 	if err != nil {
 		return err
 	}
-	defer file.Close()
+	defer func() {
+		if err := file.Close(); err != nil {
+			log.Printf("error closing file: %v", err)
+		}
+	}()
 
 	// Write the bytes to the file
 	_, err = io.Copy(file, response.Body)
@@ -398,13 +406,15 @@ func (r *PdfRenderer) processImage(node ast.Image, entering bool) {
 		_, err := os.Stat(destination)
 		if errors.Is(err, os.ErrNotExist) {
 			// download the image so we can use it
-			var source string = destination
+			source := destination
 			if !strings.HasPrefix(destination, "http") {
 				if r.InputBaseURL != "" {
 					source = r.InputBaseURL + "/" + destination
 				}
 			}
-			os.MkdirAll(tempDir, 755)
+			if err := os.MkdirAll(tempDir, 0o755); err != nil {
+				log.Printf("error creating temp directory: %v", err)
+			}
 			err := downloadFile(source, tempDir+"/"+filepath.Base(destination))
 			if err != nil {
 				fmt.Println(err.Error())
@@ -414,6 +424,9 @@ func (r *PdfRenderer) processImage(node ast.Image, entering bool) {
 			}
 		}
 		mtype, err := mimetype.DetectFile(destination)
+		if err != nil {
+			fmt.Println(err.Error())
+		}
 		if mtype.Is("image/svg+xml") {
 			re := regexp.MustCompile(`<svg\s*.*\s*width="([0-9\.]+)"\sheight="([0-9\.]+)".*>`)
 			contents, _ := os.ReadFile(destination)
@@ -425,7 +438,7 @@ func (r *PdfRenderer) processImage(node ast.Image, entering bool) {
 			}
 
 			if _, err := tf.Write(contents); err != nil {
-				tf.Close()
+				_ = tf.Close()
 				log.Println(err)
 				return
 			}
@@ -433,7 +446,9 @@ func (r *PdfRenderer) processImage(node ast.Image, entering bool) {
 				log.Println(err)
 				return
 			}
-			os.Rename(destination, tf.Name())
+			if err := os.Rename(destination, tf.Name()); err != nil {
+				log.Printf("error renaming file from %s to %s: %v", destination, tf.Name(), err)
+			}
 			destination = tf.Name()
 			width, _ := strconv.ParseFloat(matches[1], 64)
 			height, _ := strconv.ParseFloat(matches[2], 64)
@@ -466,7 +481,7 @@ func (r *PdfRenderer) processImage(node ast.Image, entering bool) {
 }
 
 func (r *PdfRenderer) processCode(node ast.Node) {
-	r.tracer("processCode", fmt.Sprintf("%s", string(node.AsLeaf().Literal)))
+	r.tracer("processCode", string(node.AsLeaf().Literal))
 	if r.NeedCodeStyleUpdate {
 		r.tracer("Code (entering)", "")
 		r.setStyler(r.Code)
