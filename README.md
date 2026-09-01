@@ -214,11 +214,7 @@ pre-commit install
 
 Following that, these tests will run every time you invoke `git commit`:
 ```sh
-go fmt...................................................................Passed
-go imports...............................................................Passed
-go vet...................................................................Passed
-go lint..................................................................Passed
-go-critic................................................................Passed
+golangci-lint-full.......................................................Passed
 ```
 
 - Submit a pull request and include a succinct description of the feature or issue it addresses 
