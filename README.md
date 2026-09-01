@@ -199,11 +199,8 @@ and the data provided while the AST is presented.
 - Set up and run pre-commit hooks:
 
 ```sh
-# Install the needed GO packages:
-go install github.com/go-critic/go-critic/cmd/gocritic@latest
-go install golang.org/x/tools/cmd/goimports@latest
-go install golang.org/x/lint/golint@latest
-go install github.com/gordonklaus/ineffassign@latest
+# Install `golangci-lint`:
+curl -sSfL https://golangci-lint.run/install.sh | sh -s -- -b $(go env GOPATH)/bin v2.13.2
 
 # Install the `pre-commit` util:
 pip install pre-commit
